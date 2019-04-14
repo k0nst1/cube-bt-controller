@@ -25677,3 +25677,8 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+body {
+  background-color: #2a2a2a;
+  color: #679215;
+}

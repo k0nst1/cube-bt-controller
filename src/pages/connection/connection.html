@@ -6,42 +6,72 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Connection</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Connection</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-list-header>
-      <h2><ion-icon name="bluetooth"></ion-icon> Connected Devices</h2>
-    </ion-list-header>
-    <ion-item *ngFor="let cube of connectedCubes">
-      <p>
-        {{cube.description}}
-      </p>
-      <button ion-button clear large item-end>
-        <ion-icon large name="log-out"></ion-icon>
-      </button>
-      <button ion-button clear large item-end>
-        <ion-icon large="" name="settings"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header><h2>Unpaired Cubes</h2>
-      <button item-end ion-button clear large><ion-icon name="sync"></ion-icon></button>
-    </ion-list-header>
-    <ion-item *ngFor="let unpairedCube of unpairedCubes">
-      <p>{{unpairedCube.name}}
-      </p>
-      <button (click)="connectToDevice(unpairedCube)" ion-button clear large item-end>
-        <ion-icon md="md-log-in" name="log-in"></ion-icon>
-      </button>
-      <button ion-button clear large item-end>
-        <ion-icon md="md-settings" name="settings"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>
+                <ion-icon name="sync"></ion-icon>
+            </button>
+        </ion-list-header>
+        <ion-item *ngIf="isScanning" text-center>
+            <ion-spinner name="dots"></ion-spinner>
+        </ion-item>
+        <ion-item>
+            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"
+                        (ionChange)="connectToDevice($event)">
+                <h2>Nearby Devices</h2>
+                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?
+                    device.name : device.macAddress}}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+
+        <div [hidden]="!showDeviceControl">
+            <ion-list-header>Configuration for:{{currentDevice.macAddress}}
+
+            </ion-list-header>
+
+            <h2>Mode Settings</h2>
+            <ion-select [(ngModel)]="currentDevice.play.mode"  style="max-width:100%" >
+            <ion-option value="1">Mode 1</ion-option>
+            <ion-option value="2">Mode 2</ion-option>
+            <ion-option value="3">Mode 3</ion-option>
+            <ion-option value="4">Mode 4</ion-option>
+            <ion-option value="5">Mode 5</ion-option>
+            <ion-option value="6">Mode 6</ion-option>
+            <ion-option value="7">Mode 7</ion-option>
+            <ion-option value="8">Mode 8</ion-option>
+            </ion-select>
+            <h2>Global Settings</h2>
+            <ion-item>
+                <ion-label>Brightness</ion-label>
+                <ion-range color="dark" [(ngModel)]="currentDevice.global.bri" min="0" max="255"
+                           pin="true"></ion-range>
+            </ion-item>
+            <ion-item>
+                <ion-label>Speed</ion-label>
+                <ion-range color="dark" [(ngModel)]="currentDevice.global.speed" min="0" max="255"
+                           pin="true"></ion-range>
+            </ion-item>
+            <ion-item>
+                <ion-label>Color</ion-label>
+                <ion-range color="danger" [(ngModel)]="currentDevice.global.color.r" min="0" max="255"
+                           pin="true"></ion-range>
+                <ion-range color="secondary" [(ngModel)]="currentDevice.global.color.g" min="0" max="255"
+                           pin="true"></ion-range>
+                <ion-range color="primary" [(ngModel)]="currentDevice.global.color.b" min="0" max="255"
+                           pin="true"></ion-range>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="success" (click)="transferConfiguration()">Transfer Changes
+                </button>
+            </ion-item>
+        </div>
+    </ion-list>
 </ion-content>

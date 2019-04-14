@@ -8,8 +8,7 @@ webpackJsonp([1],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_cube__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_unpairedCube__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__ = __webpack_require__(251);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,65 +34,105 @@ var ConnectionPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.bt = bt;
+        this.peripheral = {};
+        this.showDeviceControl = false;
+        this.transferSucceeded = false;
         this.bluetooth = bt;
-        this.connectedCubes = [];
-        this.unpairedCubes = [];
-        var cubeExample = new __WEBPACK_IMPORTED_MODULE_3__models_cube__["a" /* Cube */]();
-        cubeExample.id = 1;
-        cubeExample.name = "Wohnzimmer";
-        cubeExample.description = "First example cube";
-        cubeExample.status = "connected";
-        var unpairedCubeExample = new __WEBPACK_IMPORTED_MODULE_4__models_unpairedCube__["a" /* UnpairedCube */]();
-        unpairedCubeExample.name = "13123-1231-3133-1";
-        unpairedCubeExample.uuid = "12313-13213123-1231231-12312312";
-        unpairedCubeExample.macAddress = "00-14-22-01-23-45";
-        this.unpairedCubes.push(unpairedCubeExample);
-        this.connectedCubes.push(cubeExample);
+        this.bluetoothDevices = [];
+        this.currentDevice = new __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+        this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
     }
     ConnectionPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ConnectionPage');
+        this.isScanning = false;
         this.checkBluetooth();
         //this.listConnectedDevices();
         //this.discoverUnpaired();
     };
     ConnectionPage.prototype.discoverUnpaired = function () {
-        var comp = this;
-        this.bluetooth.discoverUnpaired().then(function success(response) {
-            response.data.foreach(function (device) {
-                var newDevice = new __WEBPACK_IMPORTED_MODULE_4__models_unpairedCube__["a" /* UnpairedCube */]();
-                newDevice.name = device.name ? device.name : null;
-                newDevice.uuid = device.id;
-                newDevice.macAddress = device.address;
-                comp.unpairedCubes.push(newDevice);
-            });
-            console.log(response);
+        this.isScanning = true;
+        var component = this;
+        console.log("currently scanning...");
+        this.bluetooth.discoverUnpaired().then(function success(data) {
+            if (data) {
+                component.bluetoothDevices = [];
+                data.forEach(function (device) {
+                    var newDevice = new __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+                    newDevice.name = device.name ? device.name : null;
+                    newDevice.uuid = device.id;
+                    newDevice.macAddress = device.address;
+                    newDevice.connected = false;
+                    component.bluetoothDevices.push(newDevice);
+                });
+            }
+            console.log("finished scanning...");
+            component.isScanning = false;
+            console.log(data);
         }, function error(error) {
             console.log(error);
         });
     };
     ConnectionPage.prototype.checkBluetooth = function () {
         var comp = this;
+        this.disconnectFromDevice(null);
         this.bluetooth.isEnabled().then(function success(response) {
             comp.discoverUnpaired();
         }, function error() {
             comp.bluetooth.enable();
         });
     };
-    ConnectionPage.prototype.listConnectedDevices = function () {
-        this.bluetooth.list().then(function success(response) {
+    ConnectionPage.prototype.connectToDevice = function (unpairedDevice) {
+        var _this = this;
+        this.bluetooth.connect(unpairedDevice);
+        this.bluetooth.connect(unpairedDevice).subscribe(function (peripheral) { return _this.onConnected(peripheral, unpairedDevice); }, function (peripheral) { return _this.onConnectionFail(unpairedDevice); });
+    };
+    ConnectionPage.prototype.disconnectFromDevice = function (pairedDevice) {
+        this.bluetooth.disconnect();
+        if (pairedDevice) {
+            pairedDevice.connected = false;
+        }
+    };
+    ConnectionPage.prototype.onConnected = function (peripheral, unpairedDevice) {
+        var _this = this;
+        this.zone.run(function () {
+            _this.currentDevice.connected = true;
+            _this.currentDevice.macAddress = unpairedDevice;
+            _this.showDeviceControl = true;
         });
     };
-    ConnectionPage.prototype.connectToDevice = function (unpairedCube) {
-        this.bluetooth.connect(unpairedCube.uuid);
-        var index = this.unpairedCubes.indexOf(unpairedCube);
-        this.unpairedCubes.splice(index, 1);
-        var newPairedCube = new __WEBPACK_IMPORTED_MODULE_3__models_cube__["a" /* Cube */]();
-        newPairedCube.name = "generic name " + this.connectedCubes.length + 1;
-        this.connectedCubes.push(newPairedCube);
+    ConnectionPage.prototype.onConnectionFail = function (unpairedDevice) {
+        unpairedDevice.connected = false;
+    };
+    ConnectionPage.prototype.showControl = function () {
+    };
+    ConnectionPage.prototype.changeRgb = function (cube, r, g, b) {
+        var exampleJson = {
+            command: "playMode",
+            parameters: { mode: 10, brightness: 50, speed: 80, color: { r: 255, b: 123, g: 90 } }
+        };
+        this.bluetooth.write(JSON.stringify(exampleJson)).then(function success(response) {
+            cube.rgb = { r: r, g: g, b: b };
+        });
+    };
+    ConnectionPage.prototype.changeMode = function (mode) {
+        var device = this.currentDevice;
+        this.bluetooth.write(mode.toString()).then(function success(response) {
+            device.mode = mode;
+        });
+    };
+    ConnectionPage.prototype.transferConfiguration = function () {
+        var transferSuccess = this.transferSucceeded;
+        var device = this.currentDevice;
+        var input = {};
+        Object.assign(input, { global: device.global }, device.play);
+        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
+            console.log("Succesfully sent settings object");
+            transferSuccess = true;
+        });
     };
     ConnectionPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Connection</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      <h2><ion-icon name="bluetooth"></ion-icon> Connected Devices</h2>\n    </ion-list-header>\n    <ion-item *ngFor="let cube of connectedCubes">\n      <p>\n        {{cube.description}}\n      </p>\n      <button ion-button clear large item-end>\n        <ion-icon large name="log-out"></ion-icon>\n      </button>\n      <button ion-button clear large item-end>\n        <ion-icon large="" name="settings"></ion-icon>\n      </button>\n    </ion-item>\n  </ion-list>\n  <ion-list>\n    <ion-list-header><h2>Unpaired Cubes</h2>\n      <button item-end ion-button clear large><ion-icon name="sync"></ion-icon></button>\n    </ion-list-header>\n    <ion-item *ngFor="let unpairedCube of unpairedCubes">\n      <p>{{unpairedCube.name}}\n      </p>\n      <button (click)="connectToDevice(unpairedCube)" ion-button clear large item-end>\n        <ion-icon md="md-log-in" name="log-in"></ion-icon>\n      </button>\n      <button ion-button clear large item-end>\n        <ion-icon md="md-settings" name="settings"></ion-icon>\n      </button>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Connection</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <ion-list-header>\n            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>\n                <ion-icon name="sync"></ion-icon>\n            </button>\n        </ion-list-header>\n        <ion-item *ngIf="isScanning" text-center>\n            <ion-spinner name="dots"></ion-spinner>\n        </ion-item>\n        <ion-item>\n            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"\n                        (ionChange)="connectToDevice($event)">\n                <h2>Nearby Devices</h2>\n                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?\n                    device.name : device.macAddress}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n\n        <div [hidden]="!showDeviceControl">\n            <ion-list-header>Configuration for:{{currentDevice.macAddress}}\n\n            </ion-list-header>\n\n            <h2>Mode Settings</h2>\n            <ion-select [(ngModel)]="currentDevice.play.mode"  style="max-width:100%" >\n            <ion-option value="1">Mode 1</ion-option>\n            <ion-option value="2">Mode 2</ion-option>\n            <ion-option value="3">Mode 3</ion-option>\n            <ion-option value="4">Mode 4</ion-option>\n            <ion-option value="5">Mode 5</ion-option>\n            <ion-option value="6">Mode 6</ion-option>\n            <ion-option value="7">Mode 7</ion-option>\n            <ion-option value="8">Mode 8</ion-option>\n            </ion-select>\n            <h2>Global Settings</h2>\n            <ion-item>\n                <ion-label>Brightness</ion-label>\n                <ion-range color="dark" [(ngModel)]="currentDevice.global.bri" min="0" max="255"\n                           pin="true"></ion-range>\n            </ion-item>\n            <ion-item>\n                <ion-label>Speed</ion-label>\n                <ion-range color="dark" [(ngModel)]="currentDevice.global.speed" min="0" max="255"\n                           pin="true"></ion-range>\n            </ion-item>\n            <ion-item>\n                <ion-label>Color</ion-label>\n                <ion-range color="danger" [(ngModel)]="currentDevice.global.color.r" min="0" max="255"\n                           pin="true"></ion-range>\n                <ion-range color="secondary" [(ngModel)]="currentDevice.global.color.g" min="0" max="255"\n                           pin="true"></ion-range>\n                <ion-range color="primary" [(ngModel)]="currentDevice.global.color.b" min="0" max="255"\n                           pin="true"></ion-range>\n            </ion-item>\n            <ion-item>\n                <button ion-button color="success" (click)="transferConfiguration()">Transfer Changes\n                </button>\n            </ion-item>\n        </div>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */]])
     ], ConnectionPage);
@@ -126,7 +165,7 @@ webpackEmptyAsyncContext.id = 110;
 
 var map = {
 	"../pages/connection/connection.module": [
-		272,
+		271,
 		0
 	]
 };
@@ -168,8 +207,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__ = __webpack_require__(100);
@@ -193,7 +232,7 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__["a" /* ConnectionPage */]
@@ -216,8 +255,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
                 __WEBPACK_IMPORTED_MODULE_8__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */],
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
-            ]
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
+            ],
+            schemas: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["i" /* CUSTOM_ELEMENTS_SCHEMA */]]
         })
     ], AppModule);
     return AppModule;
@@ -231,33 +271,29 @@ var AppModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Cube; });
-var Cube = /** @class */ (function () {
-    function Cube() {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BluetoothDevice; });
+var BluetoothDevice = /** @class */ (function () {
+    function BluetoothDevice() {
+        this.mode = 1;
+        this.global = {
+            speed: 100,
+            bri: 100,
+            color: { r: 255, g: 255, b: 255 }
+        };
+        this.play = {
+            mode: 1,
+            feature1: 100,
+            feature2: 100
+        };
     }
-    return Cube;
+    return BluetoothDevice;
 }());
 
-//# sourceMappingURL=cube.js.map
+//# sourceMappingURL=bluetoothDevice.js.map
 
 /***/ }),
 
-/***/ 252:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UnpairedCube; });
-var UnpairedCube = /** @class */ (function () {
-    function UnpairedCube() {
-    }
-    return UnpairedCube;
-}());
-
-//# sourceMappingURL=unpairedCube.js.map
-
-/***/ }),
-
-/***/ 271:
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -308,11 +344,11 @@ var MyApp = /** @class */ (function () {
         this.nav.setRoot(page.component);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);

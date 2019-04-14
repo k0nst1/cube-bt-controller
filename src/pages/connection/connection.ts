@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
-import {Cube} from "../../models/cube";
-import {UnpairedCube} from "../../models/unpairedCube";
+import {BluetoothDevice} from "../../models/bluetoothDevice";
+import {NgZone} from "@angular/core";
 
 /**
  * Generated class for the ConnectionPage page.
@@ -13,81 +13,128 @@ import {UnpairedCube} from "../../models/unpairedCube";
 
 @IonicPage()
 @Component({
-  selector: 'page-connection',
-  templateUrl: 'connection.html',
+    selector: 'page-connection',
+    templateUrl: 'connection.html',
 })
 export class ConnectionPage {
 
-  bluetooth: BluetoothSerial;
-  connectedCubes: Cube[];
-  unpairedCubes: UnpairedCube[];
+    bluetooth: BluetoothSerial;
+    bluetoothDevices: BluetoothDevice[];
+    peripheral: any = {};
+    isScanning: boolean;
+    currentDevice: BluetoothDevice;
+    showDeviceControl: boolean = false;
+    zone: NgZone;
+    transferSucceeded: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public bt: BluetoothSerial) {
-    this.bluetooth = bt;
-    this.connectedCubes = [];
-    this.unpairedCubes = [];
+    constructor(public navCtrl: NavController, public navParams: NavParams, public bt: BluetoothSerial) {
+        this.bluetooth = bt;
+        this.bluetoothDevices = [];
+        this.currentDevice = new BluetoothDevice();
+        this.zone = new NgZone({enableLongStackTrace: false});
 
-    let cubeExample = new Cube();
-    cubeExample.id = 1;
-    cubeExample.name = "Wohnzimmer";
-    cubeExample.description = "First example cube";
-    cubeExample.status = "connected";
 
-    let unpairedCubeExample = new UnpairedCube();
-    unpairedCubeExample.name = "13123-1231-3133-1";
-    unpairedCubeExample.uuid = "12313-13213123-1231231-12312312";
-    unpairedCubeExample.macAddress = "00-14-22-01-23-45";
+    }
 
-    this.unpairedCubes.push(unpairedCubeExample);
-    this.connectedCubes.push(cubeExample);
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ConnectionPage');
+        this.isScanning = false;
+        this.checkBluetooth();
+        //this.listConnectedDevices();
+        //this.discoverUnpaired();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ConnectionPage');
-    this.checkBluetooth();
-    //this.listConnectedDevices();
-    //this.discoverUnpaired();
+    }
 
-  }
+    discoverUnpaired() {
+        this.isScanning = true;
+        let component = this;
+        console.log("currently scanning...");
+        this.bluetooth.discoverUnpaired().then(function success(data) {
+            if (data) {
+                component.bluetoothDevices = [];
+                data.forEach(device => {
+                    let newDevice = new BluetoothDevice();
+                    newDevice.name = device.name ? device.name : null;
+                    newDevice.uuid = device.id;
+                    newDevice.macAddress = device.address;
+                    newDevice.connected = false;
+                    component.bluetoothDevices.push(newDevice);
+                });
+            }
+            console.log("finished scanning...");
+            component.isScanning = false;
+            console.log(data);
+        }, function error(error) {
+            console.log(error);
+        })
+    }
 
-  discoverUnpaired() {
-    let comp = this;
-    this.bluetooth.discoverUnpaired().then(function success(response) {
-      response.data.foreach(device => {
-        let newDevice = new UnpairedCube();
-        newDevice.name = device.name ? device.name : null;
-        newDevice.uuid = device.id;
-        newDevice.macAddress = device.address;
+    private checkBluetooth() {
+        let comp = this;
+        this.disconnectFromDevice(null);
+        this.bluetooth.isEnabled().then(function success(response) {
+            comp.discoverUnpaired();
+        }, function error() {
+            comp.bluetooth.enable();
+        });
+    }
 
-        comp.unpairedCubes.push(newDevice);
-      })
-      console.log(response);
-    }, function error(error) {
-      console.log(error);
-    })
-  }
+    connectToDevice(unpairedDevice: string) {
+        this.bluetooth.connect(unpairedDevice);
 
-  private checkBluetooth() {
-    let comp = this;
-    this.bluetooth.isEnabled().then(function success(response) {
-      comp.discoverUnpaired();
-    }, function error() {
-      comp.bluetooth.enable();
-    });
-  }
+        this.bluetooth.connect(unpairedDevice).subscribe(
+            peripheral => this.onConnected(peripheral, unpairedDevice),
+            peripheral => this.onConnectionFail(unpairedDevice)
+        );
+    }
 
-  private listConnectedDevices() {
-    this.bluetooth.list().then(function success(response) {
+    disconnectFromDevice(pairedDevice: BluetoothDevice) {
+        this.bluetooth.disconnect();
+        if (pairedDevice) {
+            pairedDevice.connected = false;
+        }
+    }
 
-    })
-  }
+    private onConnected(peripheral, unpairedDevice) {
+        this.zone.run(() => {
+            this.currentDevice.connected = true;
+            this.currentDevice.macAddress = unpairedDevice;
+            this.showDeviceControl = true;
+        });
+    }
 
-  connectToDevice(unpairedCube: UnpairedCube) {
-    this.bluetooth.connect(unpairedCube.uuid);
-    let index = this.unpairedCubes.indexOf(unpairedCube);
-    this.unpairedCubes.splice(index, 1);
-    let newPairedCube = new Cube();
-    newPairedCube.name = "generic name " + this.connectedCubes.length + 1;
-    this.connectedCubes.push(newPairedCube);
-  }
+    private onConnectionFail(unpairedDevice) {
+        unpairedDevice.connected = false;
+    }
+
+    private showControl() {
+    }
+
+    public changeRgb(cube, r, g, b) {
+        let exampleJson = {
+            command: "playMode",
+            parameters: {mode: 10, brightness: 50, speed: 80, color: {r: 255, b: 123, g: 90}}
+        };
+        this.bluetooth.write(JSON.stringify(exampleJson)).then(function success(response) {
+            cube.rgb = {r: r, g: g, b: b};
+        });
+    }
+
+    public changeMode(mode){
+        let device = this.currentDevice;
+        this.bluetooth.write(mode.toString()).then(function success(response) {
+            device.mode = mode;
+        });
+    }
+
+    public transferConfiguration(){
+        let transferSuccess = this.transferSucceeded;
+        let device = this.currentDevice;
+        let input = {};
+        Object.assign(input, {global:device.global}, device.play);
+        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
+            console.log("Succesfully sent settings object")
+            transferSuccess = true;
+        });
+    }
 }

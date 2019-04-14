@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 272:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22,12 +22,15 @@ var ConnectionPageModule = /** @class */ (function () {
     function ConnectionPageModule() {
     }
     ConnectionPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__connection__["a" /* ConnectionPage */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__connection__["a" /* ConnectionPage */]),
+            ],
+            schemas: [
+                __WEBPACK_IMPORTED_MODULE_0__angular_core__["i" /* CUSTOM_ELEMENTS_SCHEMA */]
             ],
         })
     ], ConnectionPageModule);
