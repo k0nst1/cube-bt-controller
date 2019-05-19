@@ -25682,3 +25682,12 @@ body {
   background-color: #2a2a2a;
   color: #679215;
 }
+
+.playbutton {
+  font-size: 64px;
+}
+
+.mode-select {
+  height: 100%;
+  font-size: 25px;
+}

@@ -1,0 +1,91 @@
+<!--
+  Generated template for the ProcedurePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>procedure</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let entry of listOfModes">
+        {{entry ? entry.modeName : ""}}
+    </ion-item>
+  </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+
+          </ion-col>
+          <ion-col align-items-center col-6>
+            <ion-select align-items-center class="mode-select" [(ngModel)]="newProcedureEntry.modeName"
+                        style="max-width:100%">
+              <ion-option value="1">Mode 1</ion-option>
+              <ion-option value="2">Mode 2</ion-option>
+              <ion-option value="3">Mode 3</ion-option>
+              <ion-option value="4">Mode 4</ion-option>
+              <ion-option value="5">Mode 5</ion-option>
+              <ion-option value="6">Mode 6</ion-option>
+              <ion-option value="7">Mode 7</ion-option>
+              <ion-option value="8">Mode 8</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col col-3>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-row>
+        <ion-col col-3></ion-col>
+
+        <ion-col col-6>
+            <ion-label>Speed</ion-label>
+            <ion-range [debounce]="500" color="dark" [(ngModel)]="newProcedureEntry.speed" min="0"
+                       max="255"
+                       pin="true"></ion-range>
+        </ion-col>
+        <ion-col col-3></ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col col-3></ion-col>
+        <ion-col col-6>
+            <ion-label>Hue</ion-label>
+            <ion-range [debounce]="500" [(ngModel)]="newProcedureEntry.color.hue" min="0" max="255"
+                       pin="true"></ion-range>
+        </ion-col>
+        <ion-col col-3></ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col col-3></ion-col>
+        <ion-col col-6>
+
+            <ion-label>Saturation</ion-label>
+            <ion-range [debounce]="500" [(ngModel)]="newProcedureEntry.color.saturation" min="0"
+                       max="255"
+                        pin="true"></ion-range>
+        </ion-col>
+        <ion-col col-3></ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col col-3></ion-col>
+        <ion-col col-6>
+            <ion-label>Value</ion-label>
+            <ion-range [debounce]="500" [(ngModel)]="newProcedureEntry.color.value" min="0" max="255"
+                       pin="true"></ion-range>
+        </ion-col>
+        <ion-col col-3></ion-col>
+
+      </ion-row>
+        <button ion-button color="success" (click)="addProcedureEntry(newProcedureEntry)">Transfer Changes
+        </button>
+</ion-content>

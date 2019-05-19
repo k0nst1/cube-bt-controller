@@ -36,41 +36,100 @@
             <ion-list-header>Configuration for:{{currentDevice.macAddress}}
 
             </ion-list-header>
-
-            <h2>Mode Settings</h2>
-            <ion-select [(ngModel)]="currentDevice.play.mode"  style="max-width:100%" >
-            <ion-option value="1">Mode 1</ion-option>
-            <ion-option value="2">Mode 2</ion-option>
-            <ion-option value="3">Mode 3</ion-option>
-            <ion-option value="4">Mode 4</ion-option>
-            <ion-option value="5">Mode 5</ion-option>
-            <ion-option value="6">Mode 6</ion-option>
-            <ion-option value="7">Mode 7</ion-option>
-            <ion-option value="8">Mode 8</ion-option>
-            </ion-select>
+            <ion-item>
+                <button ion-button color="success">Procedures
+                </button>
+            </ion-item>            <h2>Mode Settings</h2>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"
+                                  (click)="previousMode()"></ion-icon>
+                    </ion-col>
+                    <ion-col align-items-center col-6>
+                        <ion-select align-items-center class="mode-select" [(ngModel)]="currentDevice.play.mode"
+                                    style="max-width:100%">
+                            <ion-option value="1">Mode 1</ion-option>
+                            <ion-option value="2">Mode 2</ion-option>
+                            <ion-option value="3">Mode 3</ion-option>
+                            <ion-option value="4">Mode 4</ion-option>
+                            <ion-option value="5">Mode 5</ion-option>
+                            <ion-option value="6">Mode 6</ion-option>
+                            <ion-option value="7">Mode 7</ion-option>
+                            <ion-option value="8">Mode 8</ion-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-icon (click)="nextMode()" float-right class="playbutton playbutton-next" large
+                                  name="arrow-dropright"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
             <h2>Global Settings</h2>
-            <ion-item>
-                <ion-label>Brightness</ion-label>
-                <ion-range color="dark" [(ngModel)]="currentDevice.global.bri" min="0" max="255"
-                           pin="true"></ion-range>
-            </ion-item>
-            <ion-item>
-                <ion-label>Speed</ion-label>
-                <ion-range color="dark" [(ngModel)]="currentDevice.global.speed" min="0" max="255"
-                           pin="true"></ion-range>
-            </ion-item>
-            <ion-item>
-                <ion-label>Color</ion-label>
-                <ion-range color="danger" [(ngModel)]="currentDevice.global.color.r" min="0" max="255"
-                           pin="true"></ion-range>
-                <ion-range color="secondary" [(ngModel)]="currentDevice.global.color.g" min="0" max="255"
-                           pin="true"></ion-range>
-                <ion-range color="primary" [(ngModel)]="currentDevice.global.color.b" min="0" max="255"
-                           pin="true"></ion-range>
-            </ion-item>
+            <ion-row>
+                <ion-col col-3></ion-col>
+
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Speed</ion-label>
+                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentDevice.global.speed" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Hue</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentDevice.global.color.hue" min="0" max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+
+                    <ion-item>
+                        <ion-label>Saturation</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentDevice.global.color.saturation" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Value</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentDevice.global.color.value" min="0" max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
             <ion-item>
                 <button ion-button color="success" (click)="transferConfiguration()">Transfer Changes
                 </button>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="success" (click)="addToProcedure()">Add to Procedure
+                </button><ion-range [debounce]="500" [(ngModel)]="currentDevice.procedureTimeLapse" min="0" max="20"
+                                    (ionChange)="triggerTransfer()" pin="true"></ion-range>
+            </ion-item>
+
+            <ion-item>
+                <ion-checkbox [(ngModel)]="triggerAutomatically">Trigger Automatically</ion-checkbox>
             </ion-item>
         </div>
     </ion-list>

@@ -9,13 +9,48 @@ export class BluetoothDevice {
 
     public global: object = {
         speed: 100,
-        bri: 100,
-        color: { r:255, g:255, b:255}
-    }
+        color: {hue: 255, saturation: 255, value: 255}
+    };
     public play: object = {
         mode: 1,
         feature1: 100,
         feature2: 100
-    }
+    };
+    public nextMode = function () {
+        if (this.play.mode == 8) {
+            this.play.mode = 1;
+        } else {
+            this.play.mode++;
+        }
+    };
 
+    public previousMode = function () {
+        if (this.play.mode == 1) {
+            this.play.mode = 8;
+        } else {
+            this.play.mode--;
+        }
+    };
+    public modes: object =
+        [
+            {
+                "mode": 1,
+                "feature1": 125,
+                "feature2": 125,
+                "speed": 100,
+                color: {hue: 100, saturation: 255, value: 255},
+                "useLocal": false
+            },
+            {
+                "mode": 2,
+                "feature1": 125,
+                "feature2": 125,
+                "speed": 100,
+                color: {hue: 100, saturation: 255, value: 255},
+                "useLocal": false
+            }
+
+        ]
+
+    public procedureTimeLapse: number = 10;
 }
