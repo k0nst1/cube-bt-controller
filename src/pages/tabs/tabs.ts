@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Tabs } from "ionic-angular";
+import {ProgramPage} from "../program/program";
+import {PlayPage} from "../play/play";
+import {ConnectionPage} from "../connection/connection";
 
 /**
  * Generated class for the TabsPage page.
@@ -15,9 +19,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TabsPage {
 
-    tab1 = 'ConnectionPage';
-    tab2 = 'PlayPage';
-    tab3 = 'ProcedurePage';
+    connectionTab = ConnectionPage;
+    playTab = PlayPage;
+    programTab = ProgramPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

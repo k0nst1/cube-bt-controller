@@ -11,7 +11,6 @@ import {NgZone} from "@angular/core";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
     selector: 'page-connection',
     templateUrl: 'connection.html',
@@ -34,8 +33,8 @@ export class ConnectionPage {
         this.bluetoothDevices = [];
         this.currentDevice = new BluetoothDevice();
         this.zone = new NgZone({enableLongStackTrace: false});
-        this.currentDevice.connected = true;
-        this.showDeviceControl = true;
+        //this.currentDevice.connected = true;
+        //this.showDeviceControl = true;
     }
 
     ionViewDidLoad() {
@@ -134,6 +133,7 @@ export class ConnectionPage {
             transferSuccess = true;
         });
     }
+
     public addToProcedure() {
         let transferSuccess = this.transferSucceeded;
         let device = this.currentDevice;
@@ -142,6 +142,79 @@ export class ConnectionPage {
         this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
             console.log("Succesfully sent settings object")
             transferSuccess = true;
+        });
+    }
+
+    public sendProcedureTest() {
+        let input = {
+            "mode": "procedure",
+            "command":
+                [
+                    {
+                        "effect": 1,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 2,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 3,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 4,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 5,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 6,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                    {
+                        "effect": 7,
+                        "time": 10,
+                        "color": {hue: 100, saturation: 255, value: 255},
+                        feature1: 100,
+                        feature2: 100
+                    },
+                ]
+        };
+        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
+            console.log("Succesfully sent settings object")
+        });
+    }
+
+
+    public sendPlayTest() {
+        let input = {
+            "mode": "play",
+            "command":
+                {"effect": 1, "color": {hue: 100, saturation: 255, value: 255}, feature1: 100, feature2: 100},
+        };
+        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
+            console.log("Succesfully sent settings object")
         });
     }
 }

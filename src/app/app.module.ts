@@ -7,32 +7,42 @@ import {MyApp} from './app.component';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {ConnectionPage} from "../pages/connection/connection";
+import {ProgramPage} from "../pages/program/program";
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
-import {ProcedurePage} from "../pages/procedure/procedure";
+import {TabsPage} from "../pages/tabs/tabs";
+import {PlayPage} from "../pages/play/play";
+
 
 
 @NgModule({
     declarations: [
         MyApp,
+        TabsPage,
+        PlayPage,
         ConnectionPage,
-        ProcedurePage,
+        ProgramPage
+
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(MyApp)
+
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
         ConnectionPage,
-        ProcedurePage
+        ProgramPage,
+        TabsPage,
+        PlayPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         Geolocation,
         BluetoothSerial,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

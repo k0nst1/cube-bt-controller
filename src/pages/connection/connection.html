@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content>
+
     <ion-list>
         <ion-list-header>
             <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>
@@ -39,7 +40,8 @@
             <ion-item>
                 <button ion-button color="success">Procedures
                 </button>
-            </ion-item>            <h2>Mode Settings</h2>
+            </ion-item>
+            <h2>Mode Settings</h2>
             <ion-grid>
                 <ion-row>
                     <ion-col col-3>
@@ -124,12 +126,20 @@
             </ion-item>
             <ion-item>
                 <button ion-button color="success" (click)="addToProcedure()">Add to Procedure
-                </button><ion-range [debounce]="500" [(ngModel)]="currentDevice.procedureTimeLapse" min="0" max="20"
-                                    (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                </button>
+                <ion-range [debounce]="500" [(ngModel)]="currentDevice.procedureTimeLapse" min="0" max="20"
+                           (ionChange)="triggerTransfer()" pin="true"></ion-range>
             </ion-item>
 
             <ion-item>
                 <ion-checkbox [(ngModel)]="triggerAutomatically">Trigger Automatically</ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+                <button ion-button color="success" (click)="sendProcedureTest()">Send Procedure Test
+                </button>
+                <button ion-button color="success" (click)="sendPlayTest()">Send play Test
+                </button>
             </ion-item>
         </div>
     </ion-list>

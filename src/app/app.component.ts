@@ -4,7 +4,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {ConnectionPage} from "../pages/connection/connection";
-import {ProcedurePage} from "../pages/procedure/procedure";
+import {TabsPage} from "../pages/tabs/tabs";
 
 @Component({
     templateUrl: 'app.html'
@@ -12,17 +12,12 @@ import {ProcedurePage} from "../pages/procedure/procedure";
 export class MyApp {
     @ViewChild(Nav) nav: NavController;
 
-    rootPage: any = ConnectionPage;
+    rootPage: any = TabsPage;
 
-    pages: Array<{ title: string, component: any }>;
 
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
         this.initializeApp();
 
-        this.pages = [
-            {title: 'Connection', component: ConnectionPage},
-            {title: 'Procedure', component: ProcedurePage}
-        ];
 
     }
 
@@ -35,8 +30,4 @@ export class MyApp {
         });
     }
 
-    openPage(page) {
-        this.rootPage = page;
-        this.nav.push(ProcedurePage);
-    }
 }
