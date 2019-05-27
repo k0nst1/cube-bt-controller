@@ -11,6 +11,7 @@ import {ProgramPage} from "../pages/program/program";
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
 import {TabsPage} from "../pages/tabs/tabs";
 import {PlayPage} from "../pages/play/play";
+import { ConnectionProvider } from '../providers/connection/connection';
 
 
 
@@ -37,11 +38,13 @@ import {PlayPage} from "../pages/play/play";
         PlayPage
     ],
     providers: [
+        ConnectionProvider,
         StatusBar,
         SplashScreen,
         Geolocation,
         BluetoothSerial,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ConnectionProvider,
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

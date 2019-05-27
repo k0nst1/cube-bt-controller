@@ -4,6 +4,7 @@ import { Tabs } from "ionic-angular";
 import {ProgramPage} from "../program/program";
 import {PlayPage} from "../play/play";
 import {ConnectionPage} from "../connection/connection";
+import {ConnectionProvider} from "../../providers/connection/connection";
 
 /**
  * Generated class for the TabsPage page.
@@ -22,7 +23,9 @@ export class TabsPage {
     connectionTab = ConnectionPage;
     playTab = PlayPage;
     programTab = ProgramPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    connection: ConnectionProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public connectionProvider: ConnectionProvider) {
+      this.connection = connectionProvider;
   }
 
   ionViewDidLoad() {

@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
 import {BluetoothDevice} from "../../models/bluetoothDevice";
 import {NgZone} from "@angular/core";
+import {ConnectionProvider} from "../../providers/connection/connection";
 
 /**
  * Generated class for the ConnectionPage page.
@@ -16,8 +17,7 @@ import {NgZone} from "@angular/core";
     templateUrl: 'connection.html',
 })
 export class ConnectionPage {
-
-    bluetooth: BluetoothSerial;
+    bluetoothProvider: ConnectionProvider;
     bluetoothDevices: BluetoothDevice[];
     peripheral: any = {};
     isScanning: boolean;
@@ -28,8 +28,8 @@ export class ConnectionPage {
     triggerAutomatically: boolean = false;
 
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public bt: BluetoothSerial) {
-        this.bluetooth = bt;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public connectionProvider: ConnectionProvider) {
+        this.bluetoothProvider = connectionProvider;
         this.bluetoothDevices = [];
         this.currentDevice = new BluetoothDevice();
         this.zone = new NgZone({enableLongStackTrace: false});
@@ -50,7 +50,7 @@ export class ConnectionPage {
         this.isScanning = true;
         let component = this;
         console.log("currently scanning...");
-        this.bluetooth.discoverUnpaired().then(function success(data) {
+        this.bluetoothProvider.scanForDevices().then(function success(data) {
             if (data) {
                 component.bluetoothDevices = [];
                 data.forEach(device => {
@@ -70,151 +70,29 @@ export class ConnectionPage {
         })
     }
 
-    private nextMode() {
-        this.currentDevice.nextMode();
-    }
 
-    private previousMode() {
-        this.currentDevice.previousMode();
-    }
 
     private checkBluetooth() {
-        let comp = this;
+        let component = this;
         this.disconnectFromDevice(null);
-        this.bluetooth.isEnabled().then(function success(response) {
-            comp.discoverUnpaired();
+        this.connectionProvider.bt.isEnabled().then(function success(response) {
+            component.discoverUnpaired();
         }, function error() {
-            comp.bluetooth.enable();
+            component.connectionProvider.bt.enable();
         });
     }
 
     connectToDevice(unpairedDevice: string) {
-        this.bluetooth.connect(unpairedDevice);
-
-        this.bluetooth.connect(unpairedDevice).subscribe(
-            peripheral => this.onConnected(peripheral, unpairedDevice),
-            peripheral => this.onConnectionFail(unpairedDevice)
-        );
+        this.bluetoothProvider.connectToDevice(unpairedDevice);
     }
 
     disconnectFromDevice(pairedDevice: BluetoothDevice) {
-        this.bluetooth.disconnect();
+        this.bluetoothProvider.disconnectFromDevice(pairedDevice);
         if (pairedDevice) {
             pairedDevice.connected = false;
         }
     }
 
-    private onConnected(peripheral, unpairedDevice) {
-        this.zone.run(() => {
-            this.currentDevice.connected = true;
-            this.currentDevice.macAddress = unpairedDevice;
-            this.showDeviceControl = true;
-        });
-    }
-
-    private onConnectionFail(unpairedDevice) {
-        unpairedDevice.connected = false;
-    }
-
-    public triggerTransfer() {
-        if (this.triggerAutomatically) {
-            console.log("triggered");
-            this.transferConfiguration()
-        }
-    }
-
-    public transferConfiguration() {
-        let transferSuccess = this.transferSucceeded;
-        let device = this.currentDevice;
-        let input = {};
-        Object.assign(input, {global: device.global}, device.play);
-        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object")
-            transferSuccess = true;
-        });
-    }
-
-    public addToProcedure() {
-        let transferSuccess = this.transferSucceeded;
-        let device = this.currentDevice;
-        let input = {};
-        Object.assign(input, {"action": "procedure_add"}, device.global, device.play, {"timelapse": device.procedureTimeLapse});
-        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object")
-            transferSuccess = true;
-        });
-    }
-
-    public sendProcedureTest() {
-        let input = {
-            "mode": "procedure",
-            "command":
-                [
-                    {
-                        "effect": 1,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 2,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 3,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 4,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 5,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 6,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                    {
-                        "effect": 7,
-                        "time": 10,
-                        "color": {hue: 100, saturation: 255, value: 255},
-                        feature1: 100,
-                        feature2: 100
-                    },
-                ]
-        };
-        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object")
-        });
-    }
 
 
-    public sendPlayTest() {
-        let input = {
-            "mode": "play",
-            "command":
-                {"effect": 1, "color": {hue: 100, saturation: 255, value: 255}, feature1: 100, feature2: 100},
-        };
-        this.bluetooth.write(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object")
-        });
-    }
 }
