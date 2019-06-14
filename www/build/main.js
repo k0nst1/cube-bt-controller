@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 111:
+/***/ 110:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,16 +13,16 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 111;
+webpackEmptyAsyncContext.id = 110;
 
 /***/ }),
 
-/***/ 152:
+/***/ 151:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/tabs/tabs.module": [
-		275,
+		277,
 		0
 	]
 };
@@ -37,22 +37,22 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 152;
+webpackAsyncContext.id = 151;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 195:
+/***/ 194:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__program_program__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__play_play__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__connection_connection__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_connection_connection__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__program_program__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__play_play__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__connection_connection__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_connection_connection__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,7 +89,7 @@ var TabsPage = /** @class */ (function () {
     };
     TabsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-tabs',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/tabs/tabs.html"*/'<ion-tabs>\n    <ion-tab [root]="connectionTab" tabTitle="Connection"></ion-tab>\n    <ion-tab [enable]="connection.currentDevice.connected" [root]="programTab" tabTitle="Program"></ion-tab>\n    <ion-tab [enable]="connection.currentDevice.connected"  [root]="playTab" tabTitle="Connection" ></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/tabs/tabs.html"*/,
+            selector: 'page-tabs',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/tabs/tabs.html"*/'<ion-tabs>\n    <ion-tab [root]="connectionTab" tabTitle="Connection"></ion-tab>\n    <ion-tab [enable]="connection.currentDevice.connected"  [root]="playTab" tabTitle="Play" ></ion-tab>\n    <ion-tab [enable]="connection.currentDevice.connected" [root]="programTab" tabTitle="Program"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/tabs/tabs.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_connection_connection__["a" /* ConnectionProvider */]])
     ], TabsPage);
@@ -100,13 +100,16 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 196:
+/***/ 195:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_procedure__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_mode__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -118,6 +121,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
 /**
  * Generated class for the ProgramPage page.
  *
@@ -125,18 +131,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var ProgramPage = /** @class */ (function () {
-    function ProgramPage(navCtrl, navParams) {
+    function ProgramPage(navCtrl, navParams, provider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.provider = provider;
+        this.transfering = false;
+        this.connectionProvider = provider;
+        this.currentProgram = new __WEBPACK_IMPORTED_MODULE_3__models_procedure__["a" /* Procedure */]();
+        this.currentMode = new __WEBPACK_IMPORTED_MODULE_4__models_mode__["a" /* Mode */]("test", 100, 100, 100, 100, { hue: 255, saturation: 255, value: 255 }, 10, 1);
+        console.log(this.currentMode);
+        console.log("asdasd");
+        this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
     }
     ProgramPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ProgramPage');
     };
+    ProgramPage.prototype.addToProgram = function () {
+        var _this = this;
+        console.log(this.currentMode);
+        this.zone.run(function () {
+            _this.currentProgram.entry.push(_this.currentMode);
+            _this.currentMode = new __WEBPACK_IMPORTED_MODULE_4__models_mode__["a" /* Mode */]("test", 100, 100, 100, 100, { hue: 255, saturation: 255, value: 255 }, 10, 1);
+        });
+        console.log(this.currentProgram);
+    };
+    ;
+    ProgramPage.prototype.playProgram = function () {
+        var device = this.connectionProvider.currentDevice;
+        var input = {};
+        input = this.currentProgram.programTo8Bit();
+        this.transfering = true;
+        var component = this;
+        this.connectionProvider.transfer(input).then(function success(response) {
+            console.log("Succesfully sent settings object");
+            setTimeout(function () {
+                component.transfering = false;
+            }, 1000);
+        });
+    };
+    ProgramPage.prototype.saveProgram = function () {
+        var input = this.currentProgram.saveProgram();
+        this.transfering = true;
+        var component = this;
+        this.connectionProvider.transfer(input).then(function success(response) {
+            console.log("Succesfully sent settings object");
+            setTimeout(function () {
+                component.transfering = false;
+            }, 1000);
+        });
+    };
+    ProgramPage.prototype.removeFromProgram = function (mode) {
+        var _this = this;
+        this.zone.run(function () {
+            var index = _this.currentProgram.entry.indexOf(mode);
+            _this.currentProgram.entry.splice(index, 1);
+        });
+    };
     ProgramPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-program',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/program/program.html"*/'<!--\n  Generated template for the ProgramPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Program</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/program/program.html"*/,
+            selector: 'page-program',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/program/program.html"*/'<!--\n  Generated template for the ProgramPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Program</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <div>\n        <ion-list-header>Programs for:{{connectionProvider.currentDevice.macAddress}}\n\n        </ion-list-header>\n        <ion-list>\n            <ion-item *ngFor="let mode of currentProgram.entry">\n                M:{{mode.modeNumber}}-F1:{{mode.feature1}}-F2:{{mode.feature1}}-F3:{{mode.feature3}}-S:{{mode.speed}}\n                <ion-icon (click)="removeFromProgram(mode)" name="close"></ion-icon>\n            </ion-item>\n        </ion-list>\n        <h2>Mode Settings</h2>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3>\n                    <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"\n                              (click)="currentMode.previousMode()"></ion-icon>\n                </ion-col>\n                <ion-col align-items-center col-6>\n                    <ion-select align-items-center class="mode-select" [(ngModel)]="currentMode.modeNumber"\n                                style="max-width:100%">\n                        <ion-option value="1">Mode 1</ion-option>\n                        <ion-option value="2">Mode 2</ion-option>\n                        <ion-option value="3">Mode 3</ion-option>\n                        <ion-option value="4">Mode 4</ion-option>\n                        <ion-option value="5">Mode 5</ion-option>\n                        <ion-option value="6">Mode 6</ion-option>\n                        <ion-option value="7">Mode 7</ion-option>\n                        <ion-option value="8">Mode 8</ion-option>\n                        <ion-option value="9">Mode 9</ion-option>\n                        <ion-option value="10">Mode 10</ion-option>\n                        <ion-option value="11">Mode 11</ion-option>\n                        <ion-option value="12">Mode 12</ion-option>\n                        <ion-option value="13">Mode 13</ion-option>\n                        <ion-option value="14">Mode 14</ion-option>\n                        <ion-option value="15">Mode 15</ion-option>\n                        <ion-option value="16">Mode 16</ion-option>\n                        <ion-option value="17">Mode 17</ion-option>\n                        <ion-option value="18">Mode 18</ion-option>\n                        <ion-option value="19">Mode 19</ion-option>\n                        <ion-option value="20">Mode 20</ion-option>\n                        <ion-option value="21">Mode 21</ion-option>\n                        <ion-option value="22">Mode 22</ion-option>\n\n\n                    </ion-select>\n                </ion-col>\n                <ion-col col-3>\n                    <ion-icon (click)="currentMode.nextMode()" float-right class="playbutton playbutton-next" large\n                              name="arrow-dropright"></ion-icon>\n                </ion-col>\n            </ion-row>\n\n            <ion-row>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Hue</ion-label>\n                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.hue" min="0" max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6></ion-col>\n\n            </ion-row>\n            <ion-row>\n                <ion-col col-6>\n\n                    <ion-item>\n                        <ion-label>Saturation</ion-label>\n                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.saturation" min="0"\n                                   max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6></ion-col>\n\n            </ion-row>\n            <ion-row>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Value</ion-label>\n                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.value" min="0" max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>F1</ion-label>\n                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature1" min="0" max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>F2</ion-label>\n                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature2" min="0" max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6></ion-col>\n\n            </ion-row>\n            <ion-row>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Speed</ion-label>\n                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.speed" min="0"\n                                   max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6></ion-col>\n            </ion-row>\n            <ion-row>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Time</ion-label>\n                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.timelapse" min="0"\n                                   max="255"\n                                   pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-6></ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-item>\n            <button ion-button color="success" (click)="addToProgram()">Add to Program\n            </button>\n        </ion-item>\n        <ion-item>\n            <button ion-button color="success" [disabled]="transfering" (click)="playProgram()">Play Program\n            </button>\n        </ion-item>\n        <ion-item>\n            <button ion-button color="success" [disabled]="transfering" (click)="saveProgram()">Save Program\n            </button>\n        </ion-item>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/program/program.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__["a" /* ConnectionProvider */]])
     ], ProgramPage);
     return ProgramPage;
 }());
@@ -145,14 +200,129 @@ var ProgramPage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 196:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BluetoothDevice; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mode__ = __webpack_require__(197);
+
+var BluetoothDevice = /** @class */ (function () {
+    function BluetoothDevice() {
+        this.mode = 1;
+        this.nextMode = function () {
+            if (this.playMode.modeName == 22) {
+                this.playMode.modeName = 1;
+            }
+            else {
+                this.playMode.modeName++;
+            }
+        };
+        this.previousMode = function () {
+            if (this.playMode.modeName == 1) {
+                this.playMode.modeName = 22;
+            }
+            else {
+                this.playMode.modeName--;
+            }
+        };
+        this.playMode = new __WEBPACK_IMPORTED_MODULE_0__mode__["a" /* Mode */]("test", 100, 100, 100, 100, { hue: 255, saturation: 255, value: 255 }, null, 1);
+    }
+    BluetoothDevice.prototype.modeTo8Bit = function (array, index) {
+        array[index] = this.playMode.modeName;
+        array[index++] = this.playMode.color.hue;
+        array[index++] = this.playMode.color.saturation;
+        array[index++] = this.playMode.color.value;
+        array[index++] = this.playMode.speed;
+        array[index++] = this.playMode.feature1;
+        array[index++] = this.playMode.feature2;
+        return array;
+    };
+    return BluetoothDevice;
+}());
+
+//# sourceMappingURL=bluetoothDevice.js.map
+
+/***/ }),
+
 /***/ 197:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Mode; });
+var Mode = /** @class */ (function () {
+    function Mode(modeName, speed, feature1, feature2, feature3, color, timelapse, modeNumber) {
+        this.modeName = "test";
+        this.modeNumber = 1;
+        this.nextMode = function () {
+            if (this.modeNumber == 22) {
+                this.modeNumber = 1;
+            }
+            else {
+                this.modeNumber++;
+            }
+        };
+        this.previousMode = function () {
+            if (this.modeNumber == 1) {
+                this.modeNumber = 22;
+            }
+            else {
+                this.modeNumber--;
+            }
+        };
+        this.modeName = modeName;
+        this.speed = speed;
+        this.feature1 = feature1;
+        this.feature2 = feature2;
+        this.feature3 = feature3;
+        this.color = color;
+        this.timelapse = timelapse;
+        this.modeNumber = modeNumber;
+    }
+    Mode.prototype.modeTo8Bit = function (array, index) {
+        array[index++] = this.modeNumber;
+        array[index++] = this.color.hue;
+        array[index++] = this.color.saturation;
+        array[index++] = this.color.value;
+        array[index++] = this.speed;
+        array[index++] = this.feature1;
+        array[index++] = this.feature2;
+        if (this.timelapse) {
+            array[index++] = this.timelapse;
+        }
+        return array;
+    };
+    Mode.prototype.getInt64Bytes = function (input) {
+        return input & (255);
+    };
+    Mode.prototype.playTo8Bit = function () {
+        var array = new Uint8Array(12);
+        //let array = new Uint8Array(1000);
+        array[0] = 12;
+        array[1] = 19;
+        array[2] = 91;
+        array[3] = 8;
+        array[4] = 1;
+        array = this.modeTo8Bit(array, 5);
+        console.log(array.length);
+        console.log(array[array.length - 1]);
+        return array;
+    };
+    return Mode;
+}());
+
+//# sourceMappingURL=mode.js.map
+
+/***/ }),
+
+/***/ 199:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,116 +346,35 @@ var PlayPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.provider = provider;
-        this.triggerAutomatically = false;
+        this.triggerAutomatically = true;
         this.transferSucceeded = false;
+        this.transfering = false;
         this.connectionProvider = provider;
+        this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
     }
     PlayPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PlayPage');
     };
-    PlayPage.prototype.nextMode = function () {
-        this.connectionProvider.currentDevice.nextMode();
-    };
-    PlayPage.prototype.previousMode = function () {
-        this.connectionProvider.currentDevice.previousMode();
+    PlayPage.prototype.sendPlay = function () {
+        var component = this;
+        this.transfering = true;
+        var input = this.connectionProvider.currentDevice.playMode.playTo8Bit();
+        this.connectionProvider.transfer(input).then(function success(response) {
+            console.log("Succesfully sent settings object");
+        });
+        setTimeout(function () {
+            component.transfering = false;
+        }, 1000);
     };
     PlayPage.prototype.triggerTransfer = function () {
         if (this.triggerAutomatically) {
             console.log("triggered");
-            this.transferConfiguration();
+            this.sendPlay();
         }
-    };
-    PlayPage.prototype.transferConfiguration = function () {
-        var transferSuccess = this.transferSucceeded;
-        var device = this.connectionProvider.currentDevice;
-        var input = {};
-        Object.assign(input, { global: device.global }, device.play);
-        this.connectionProvider.transfer(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            transferSuccess = true;
-        });
-    };
-    PlayPage.prototype.addToProcedure = function () {
-        var transferSuccess = this.transferSucceeded;
-        var device = this.connectionProvider.currentDevice;
-        var input = {};
-        Object.assign(input, { "action": "procedure_add" }, device.global, device.play, { "timelapse": device.procedureTimeLapse });
-        this.connectionProvider.transfer(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            transferSuccess = true;
-        });
-    };
-    PlayPage.prototype.sendProcedureTest = function () {
-        var input = {
-            "mode": "procedure",
-            "command": [
-                {
-                    "effect": 1,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 2,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 3,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 4,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 5,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 6,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-                {
-                    "effect": 7,
-                    "time": 10,
-                    "color": { hue: 100, saturation: 255, value: 255 },
-                    feature1: 100,
-                    feature2: 100
-                },
-            ]
-        };
-        this.connectionProvider.transfer(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object");
-        });
-    };
-    PlayPage.prototype.sendPlayTest = function () {
-        var input = {
-            "mode": "play",
-            "command": { "effect": 1, "color": { hue: 100, saturation: 255, value: 255 }, feature1: 100, feature2: 100 },
-        };
-        this.connectionProvider.transfer(JSON.stringify(input)).then(function success(response) {
-            console.log("Succesfully sent settings object");
-        });
     };
     PlayPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-play',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/play/play.html"*/'<!--\n  Generated template for the PlayPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Play</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <div [hidden]="!showDeviceControl">\n    <ion-list-header>Configuration for:{{connectionProvider.currentDevice.macAddress}}\n\n    </ion-list-header>\n    <ion-item>\n      <button ion-button color="success">Procedures\n      </button>\n    </ion-item>\n    <h2>Mode Settings</h2>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-3>\n          <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"\n                    (click)="previousMode()"></ion-icon>\n        </ion-col>\n        <ion-col align-items-center col-6>\n          <ion-select align-items-center class="mode-select" [(ngModel)]="connectionProvider.currentDevice.play.mode"\n                      style="max-width:100%">\n            <ion-option value="1">Mode 1</ion-option>\n            <ion-option value="2">Mode 2</ion-option>\n            <ion-option value="3">Mode 3</ion-option>\n            <ion-option value="4">Mode 4</ion-option>\n            <ion-option value="5">Mode 5</ion-option>\n            <ion-option value="6">Mode 6</ion-option>\n            <ion-option value="7">Mode 7</ion-option>\n            <ion-option value="8">Mode 8</ion-option>\n          </ion-select>\n        </ion-col>\n        <ion-col col-3>\n          <ion-icon (click)="nextMode()" float-right class="playbutton playbutton-next" large\n                    name="arrow-dropright"></ion-icon>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <h2>Global Settings</h2>\n    <ion-row>\n      <ion-col col-3></ion-col>\n\n      <ion-col col-6>\n        <ion-item>\n          <ion-label>Speed</ion-label>\n          <ion-range [debounce]="500" color="dark" [(ngModel)]="connectionProvider.currentDevice.global.speed" min="0"\n                     max="255"\n                     (ionChange)="triggerTransfer()" pin="true"></ion-range>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3></ion-col>\n\n    </ion-row>\n    <ion-row>\n      <ion-col col-3></ion-col>\n      <ion-col col-6>\n        <ion-item>\n          <ion-label>Hue</ion-label>\n          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.hue" min="0" max="255"\n                     (ionChange)="triggerTransfer()" pin="true"></ion-range>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3></ion-col>\n\n    </ion-row>\n    <ion-row>\n      <ion-col col-3></ion-col>\n      <ion-col col-6>\n\n        <ion-item>\n          <ion-label>Saturation</ion-label>\n          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.saturation" min="0"\n                     max="255"\n                     (ionChange)="triggerTransfer()" pin="true"></ion-range>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3></ion-col>\n\n    </ion-row>\n    <ion-row>\n      <ion-col col-3></ion-col>\n      <ion-col col-6>\n        <ion-item>\n          <ion-label>Value</ion-label>\n          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.value" min="0" max="255"\n                     (ionChange)="triggerTransfer()" pin="true"></ion-range>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3></ion-col>\n\n    </ion-row>\n    <ion-item>\n      <button ion-button color="success" (click)="transferConfiguration()">Transfer Changes\n      </button>\n    </ion-item>\n    <ion-item>\n      <button ion-button color="success" (click)="addToProcedure()">Add to Procedure\n      </button>\n      <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.procedureTimeLapse" min="0" max="20"\n                 (ionChange)="triggerTransfer()" pin="true"></ion-range>\n    </ion-item>\n\n    <ion-item>\n      <ion-checkbox [(ngModel)]="triggerAutomatically">Trigger Automatically</ion-checkbox>\n    </ion-item>\n\n    <ion-item>\n      <button ion-button color="success" (click)="sendProcedureTest()">Send Procedure Test\n      </button>\n      <button ion-button color="success" (click)="sendPlayTest()">Send play Test\n      </button>\n    </ion-item>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/play/play.html"*/,
+            selector: 'page-play',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/play/play.html"*/'<!--\n  Generated template for the PlayPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Play</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <div>\n        <ion-list-header>Configuration for:{{connectionProvider.currentDevice.macAddress}}\n\n        </ion-list-header>\n\n        <h2>Mode Settings</h2>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3>\n                    <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"\n                              (ionChange)="triggerTransfer()" (click)="connectionProvider.currentDevice.playMode.previousMode()"></ion-icon>\n                </ion-col>\n                <ion-col align-items-center col-6>\n                    <ion-select (ionChange)="triggerTransfer()" align-items-center class="mode-select"\n                                [(ngModel)]="connectionProvider.currentDevice.playMode.modeNumber"\n                                style="max-width:100%">\n                        <ion-option value="1">Mode 1</ion-option>\n                        <ion-option value="2">Mode 2</ion-option>\n                        <ion-option value="3">Mode 3</ion-option>\n                        <ion-option value="4">Mode 4</ion-option>\n                        <ion-option value="5">Mode 5</ion-option>\n                        <ion-option value="6">Mode 6</ion-option>\n                        <ion-option value="7">Mode 7</ion-option>\n                        <ion-option value="8">Mode 8</ion-option>\n                        <ion-option value="9">Mode 9</ion-option>\n                        <ion-option value="10">Mode 10</ion-option>\n                        <ion-option value="11">Mode 11</ion-option>\n                        <ion-option value="12">Mode 12</ion-option>\n                        <ion-option value="13">Mode 13</ion-option>\n                        <ion-option value="14">Mode 14</ion-option>\n                        <ion-option value="15">Mode 15</ion-option>\n                        <ion-option value="16">Mode 16</ion-option>\n                        <ion-option value="17">Mode 17</ion-option>\n                        <ion-option value="18">Mode 18</ion-option>\n                        <ion-option value="19">Mode 19</ion-option>\n                        <ion-option value="20">Mode 20</ion-option>\n                        <ion-option value="21">Mode 21</ion-option>\n                        <ion-option value="22">Mode 22</ion-option>\n                        <ion-option value="23">Mode 23</ion-option>\n                        <ion-option value="24">Mode 24</ion-option>\n                        <ion-option value="25">Mode 25</ion-option>\n                    </ion-select>\n                </ion-col>\n                <ion-col col-3>\n                    <ion-icon (click)="connectionProvider.currentDevice.playMode.nextMode()" float-right\n                              class="playbutton playbutton-next" large\n                              (ionChange)="triggerTransfer()" name="arrow-dropright"></ion-icon>\n                </ion-col>\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Hue</ion-label>\n                        <ion-range [debounce]="500"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.hue"\n                                   min="0" max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n                <ion-col col-6>\n\n                    <ion-item>\n                        <ion-label>Saturation</ion-label>\n                        <ion-range [debounce]="500"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.saturation" min="0"\n                                   max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Value</ion-label>\n                        <ion-range [debounce]="500"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.value"\n                                   min="0" max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>Speed</ion-label>\n                        <ion-range [debounce]="500" color="dark"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.speed" min="0"\n                                   max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>F1</ion-label>\n                        <ion-range [debounce]="500" color="dark"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature1" min="0"\n                                   max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n            </ion-row>\n            <ion-row>\n                <ion-col col-3></ion-col>\n\n                <ion-col col-6>\n                    <ion-item>\n                        <ion-label>F2</ion-label>\n                        <ion-range [debounce]="500" color="dark"\n                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature2" min="0"\n                                   max="255"\n                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>\n                    </ion-item>\n                </ion-col>\n                <ion-col col-3></ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-item>\n            <button ion-button color="success" [disabled]="transfering" (click)="sendPlay()">Transfer\n            </button>\n        </ion-item>\n\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/play/play.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__["a" /* ConnectionProvider */]])
     ], PlayPage);
@@ -296,76 +385,15 @@ var PlayPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 198:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BluetoothDevice; });
-var BluetoothDevice = /** @class */ (function () {
-    function BluetoothDevice() {
-        this.mode = 1;
-        this.global = {
-            speed: 100,
-            color: { hue: 255, saturation: 255, value: 255 }
-        };
-        this.play = {
-            mode: 1,
-            feature1: 100,
-            feature2: 100
-        };
-        this.nextMode = function () {
-            if (this.play.mode == 8) {
-                this.play.mode = 1;
-            }
-            else {
-                this.play.mode++;
-            }
-        };
-        this.previousMode = function () {
-            if (this.play.mode == 1) {
-                this.play.mode = 8;
-            }
-            else {
-                this.play.mode--;
-            }
-        };
-        this.modes = [
-            {
-                "mode": 1,
-                "feature1": 125,
-                "feature2": 125,
-                "speed": 100,
-                color: { hue: 100, saturation: 255, value: 255 },
-                "useLocal": false
-            },
-            {
-                "mode": 2,
-                "feature1": 125,
-                "feature2": 125,
-                "speed": 100,
-                color: { hue: 100, saturation: 255, value: 255 },
-                "useLocal": false
-            }
-        ];
-        this.procedureTimeLapse = 10;
-    }
-    return BluetoothDevice;
-}());
-
-//# sourceMappingURL=bluetoothDevice.js.map
-
-/***/ }),
-
-/***/ 199:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConnectionPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_connection_connection__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connection_connection__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -380,7 +408,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Generated class for the ConnectionPage page.
  *
@@ -388,19 +415,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var ConnectionPage = /** @class */ (function () {
-    function ConnectionPage(navCtrl, navParams, bt, connectionProvider) {
+    function ConnectionPage(navCtrl, navParams, connectionProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.bt = bt;
         this.connectionProvider = connectionProvider;
         this.peripheral = {};
         this.showDeviceControl = false;
         this.transferSucceeded = false;
         this.triggerAutomatically = false;
-        this.bluetooth = bt;
         this.bluetoothProvider = connectionProvider;
         this.bluetoothDevices = [];
-        this.currentDevice = new __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+        this.currentDevice = new __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__["a" /* BluetoothDevice */]();
         this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
         //this.currentDevice.connected = true;
         //this.showDeviceControl = true;
@@ -420,12 +445,13 @@ var ConnectionPage = /** @class */ (function () {
             if (data) {
                 component.bluetoothDevices = [];
                 data.forEach(function (device) {
-                    var newDevice = new __WEBPACK_IMPORTED_MODULE_3__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+                    var newDevice = new __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__["a" /* BluetoothDevice */]();
                     newDevice.name = device.name ? device.name : null;
                     newDevice.uuid = device.id;
                     newDevice.macAddress = device.address;
                     newDevice.connected = false;
                     component.bluetoothDevices.push(newDevice);
+                    component.bluetoothProvider.bluetoothDevices.push(newDevice);
                 });
             }
             console.log("finished scanning...");
@@ -436,28 +462,35 @@ var ConnectionPage = /** @class */ (function () {
         });
     };
     ConnectionPage.prototype.checkBluetooth = function () {
-        var comp = this;
+        var component = this;
         this.disconnectFromDevice(null);
-        this.bluetooth.isEnabled().then(function success(response) {
-            comp.discoverUnpaired();
+        this.connectionProvider.bt.isEnabled().then(function success(response) {
+            component.discoverUnpaired();
         }, function error() {
-            comp.bluetooth.enable();
+            component.connectionProvider.bt.enable();
         });
     };
     ConnectionPage.prototype.connectToDevice = function (unpairedDevice) {
-        this.bluetoothProvider.connectToDevice(unpairedDevice);
+        var _this = this;
+        this.zone.run(function () {
+            _this.bluetoothProvider.connectToDevice(unpairedDevice);
+        });
     };
     ConnectionPage.prototype.disconnectFromDevice = function (pairedDevice) {
-        this.bluetoothProvider.disconnectFromDevice(pairedDevice);
-        if (pairedDevice) {
-            pairedDevice.connected = false;
-        }
+        var _this = this;
+        this.zone.run(function () {
+            _this.bluetoothProvider.disconnectFromDevice(pairedDevice);
+            if (pairedDevice) {
+                _this.currentDevice = new __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+                pairedDevice.connected = false;
+            }
+        });
     };
     ConnectionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Connection</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <ion-list>\n        <ion-list-header>\n            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>\n                <ion-icon name="sync"></ion-icon>\n            </button>\n        </ion-list-header>\n        <ion-item *ngIf="isScanning" text-center>\n            <ion-spinner name="dots"></ion-spinner>\n        </ion-item>\n        <ion-item>\n            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"\n                        (ionChange)="connectToDevice($event)">\n                <h2>Nearby Devices</h2>\n                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?\n                    device.name : device.macAddress}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
+            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Connection</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <ion-list>\n        <ion-list-header>\n            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>\n                <ion-icon name="sync"></ion-icon>\n            </button>\n        </ion-list-header>\n        <ion-item *ngIf="isScanning" text-center>\n            <ion-spinner name="dots"></ion-spinner>\n        </ion-item>\n        <ion-item>\n            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"\n                        (ionChange)="connectToDevice($event)">\n                <h2>Nearby Devices</h2>\n                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?\n                    device.name : device.macAddress}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n\n        <ion-item *ngIf="this.bluetoothProvider.currentDevice.connected">\n            Connected to {{this.bluetoothProvider.currentDevice.macAddress}}\n            <button ion-button color="success" (click)="disconnectFromDevice(this.bluetoothProvider.currentDevice)">Disconnect</button>\n        </ion-item>\n\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */], __WEBPACK_IMPORTED_MODULE_4__providers_connection_connection__["a" /* ConnectionProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_connection_connection__["a" /* ConnectionProvider */]])
     ], ConnectionPage);
     return ConnectionPage;
 }());
@@ -466,13 +499,13 @@ var ConnectionPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 200:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(224);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -480,7 +513,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 223:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -488,16 +521,16 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_program_program__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_bluetooth_serial__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_tabs_tabs__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_play_play__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_connection_connection__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_program_program__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_bluetooth_serial__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_tabs_tabs__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_play_play__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_connection_connection__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -564,16 +597,16 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 274:
+/***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(194);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -621,14 +654,62 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 51:
+/***/ 276:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Procedure; });
+var Procedure = /** @class */ (function () {
+    function Procedure() {
+        this.entry = [];
+    }
+    Procedure.prototype.programTo8Bit = function () {
+        var array = new Uint8Array(8 * this.entry.length + 5);
+        array[0] = 12;
+        array[1] = 19;
+        array[2] = 91;
+        array[3] = array.length - 4;
+        array[4] = 2;
+        array = this.modesToBytes(array);
+        console.log(array.length);
+        console.log(array[array.length - 1]);
+        return array;
+    };
+    Procedure.prototype.saveProgram = function () {
+        var array = new Uint8Array(5);
+        array[0] = 12;
+        array[1] = 19;
+        array[2] = 91;
+        array[3] = 1;
+        array[4] = 3;
+        return array;
+    };
+    Procedure.prototype.modesToBytes = function (array) {
+        var index = 5;
+        this.entry.forEach(function (mode) {
+            array = mode.modeTo8Bit(array, index);
+            index = index + 8;
+        });
+        return array;
+    };
+    Procedure.prototype.intToByte = function (input) {
+        return input & (255);
+    };
+    return Procedure;
+}());
+
+//# sourceMappingURL=procedure.js.map
+
+/***/ }),
+
+/***/ 40:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConnectionProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_bluetoothDevice__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_bluetoothDevice__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -654,6 +735,7 @@ var ConnectionProvider = /** @class */ (function () {
         this.currentDevice = new __WEBPACK_IMPORTED_MODULE_1__models_bluetoothDevice__["a" /* BluetoothDevice */]();
         console.log('Hello ConnectionProvider Provider');
         this.bluetooth = bt;
+        this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
     }
     ConnectionProvider.prototype.scanForDevices = function () {
         console.log("currently scanning...");
@@ -680,8 +762,11 @@ var ConnectionProvider = /** @class */ (function () {
         }
     };
     ConnectionProvider.prototype.onConnected = function (peripheral, unpairedDevice) {
-        this.currentDevice.connected = true;
-        this.currentDevice.macAddress = unpairedDevice;
+        var _this = this;
+        this.zone.run(function () {
+            _this.currentDevice.connected = true;
+            _this.currentDevice.macAddress = unpairedDevice;
+        });
     };
     ConnectionProvider.prototype.onConnectionFail = function (unpairedDevice) {
         unpairedDevice.connected = false;
@@ -700,5 +785,5 @@ var ConnectionProvider = /** @class */ (function () {
 
 /***/ })
 
-},[200]);
+},[201]);
 //# sourceMappingURL=main.js.map

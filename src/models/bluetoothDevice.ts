@@ -1,3 +1,5 @@
+import {Mode} from "./mode";
+
 export class BluetoothDevice {
     public uuid: string;
     public name: string;
@@ -6,51 +8,37 @@ export class BluetoothDevice {
     public usesProfile: boolean;
     public description: string;
     public mode: number = 1;
+    public playMode: Mode;
 
-    public global: object = {
-        speed: 100,
-        color: {hue: 255, saturation: 255, value: 255}
-    };
-    public play: object = {
-        mode: 1,
-        feature1: 100,
-        feature2: 100
-    };
+    constructor() {
+        this.playMode = new Mode("test", 100, 100, 100, 100, {hue: 255, saturation: 255, value: 255}, null, 1);
+    }
     public nextMode = function () {
-        if (this.play.mode == 8) {
-            this.play.mode = 1;
+        if (this.playMode.modeName == 22) {
+            this.playMode.modeName = 1;
         } else {
-            this.play.mode++;
+            this.playMode.modeName++;
         }
     };
 
     public previousMode = function () {
-        if (this.play.mode == 1) {
-            this.play.mode = 8;
+        if (this.playMode.modeName == 1) {
+            this.playMode.modeName = 22;
         } else {
-            this.play.mode--;
+            this.playMode.modeName--;
         }
     };
-    public modes: object =
-        [
-            {
-                "mode": 1,
-                "feature1": 125,
-                "feature2": 125,
-                "speed": 100,
-                color: {hue: 100, saturation: 255, value: 255},
-                "useLocal": false
-            },
-            {
-                "mode": 2,
-                "feature1": 125,
-                "feature2": 125,
-                "speed": 100,
-                color: {hue: 100, saturation: 255, value: 255},
-                "useLocal": false
-            }
 
-        ]
+    public modeTo8Bit(array, index){
+        array[index] = this.playMode.modeName;
+        array[index++] = this.playMode.color.hue;
+        array[index++] = this.playMode.color.saturation;
+        array[index++] = this.playMode.color.value;
+        array[index++] = this.playMode.speed;
+        array[index++] = this.playMode.feature1;
+        array[index++] = this.playMode.feature2;
 
-    public procedureTimeLapse: number = 10;
+        return array;
+
+    }
 }

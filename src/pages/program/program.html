@@ -6,13 +6,152 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Program</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Program</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <div>
+        <ion-list-header>Programs for:{{connectionProvider.currentDevice.macAddress}}
+
+        </ion-list-header>
+        <ion-list>
+            <ion-item *ngFor="let mode of currentProgram.entry">
+                M:{{mode.modeNumber}}-F1:{{mode.feature1}}-F2:{{mode.feature1}}-F3:{{mode.feature3}}-S:{{mode.speed}}
+                <ion-icon (click)="removeFromProgram(mode)" name="close"></ion-icon>
+            </ion-item>
+        </ion-list>
+        <h2>Mode Settings</h2>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"
+                              (click)="currentMode.previousMode()"></ion-icon>
+                </ion-col>
+                <ion-col align-items-center col-6>
+                    <ion-select align-items-center class="mode-select" [(ngModel)]="currentMode.modeNumber"
+                                style="max-width:100%">
+                        <ion-option value="1">Mode 1</ion-option>
+                        <ion-option value="2">Mode 2</ion-option>
+                        <ion-option value="3">Mode 3</ion-option>
+                        <ion-option value="4">Mode 4</ion-option>
+                        <ion-option value="5">Mode 5</ion-option>
+                        <ion-option value="6">Mode 6</ion-option>
+                        <ion-option value="7">Mode 7</ion-option>
+                        <ion-option value="8">Mode 8</ion-option>
+                        <ion-option value="9">Mode 9</ion-option>
+                        <ion-option value="10">Mode 10</ion-option>
+                        <ion-option value="11">Mode 11</ion-option>
+                        <ion-option value="12">Mode 12</ion-option>
+                        <ion-option value="13">Mode 13</ion-option>
+                        <ion-option value="14">Mode 14</ion-option>
+                        <ion-option value="15">Mode 15</ion-option>
+                        <ion-option value="16">Mode 16</ion-option>
+                        <ion-option value="17">Mode 17</ion-option>
+                        <ion-option value="18">Mode 18</ion-option>
+                        <ion-option value="19">Mode 19</ion-option>
+                        <ion-option value="20">Mode 20</ion-option>
+                        <ion-option value="21">Mode 21</ion-option>
+                        <ion-option value="22">Mode 22</ion-option>
+
+
+                    </ion-select>
+                </ion-col>
+                <ion-col col-3>
+                    <ion-icon (click)="currentMode.nextMode()" float-right class="playbutton playbutton-next" large
+                              name="arrow-dropright"></ion-icon>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Hue</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.hue" min="0" max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+
+                    <ion-item>
+                        <ion-label>Saturation</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.saturation" min="0"
+                                   max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Value</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.value" min="0" max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>F1</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature1" min="0" max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>F2</ion-label>
+                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature2" min="0" max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Speed</ion-label>
+                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.speed" min="0"
+                                   max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Time</ion-label>
+                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.timelapse" min="0"
+                                   max="255"
+                                   pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6></ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-item>
+            <button ion-button color="success" (click)="addToProgram()">Add to Program
+            </button>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="success" [disabled]="transfering" (click)="playProgram()">Play Program
+            </button>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="success" [disabled]="transfering" (click)="saveProgram()">Save Program
+            </button>
+        </ion-item>
+    </div>
 
 </ion-content>

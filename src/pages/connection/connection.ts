@@ -60,6 +60,7 @@ export class ConnectionPage {
                     newDevice.macAddress = device.address;
                     newDevice.connected = false;
                     component.bluetoothDevices.push(newDevice);
+                    component.bluetoothProvider.bluetoothDevices.push(newDevice);
                 });
             }
             console.log("finished scanning...");
@@ -83,14 +84,20 @@ export class ConnectionPage {
     }
 
     connectToDevice(unpairedDevice: string) {
-        this.bluetoothProvider.connectToDevice(unpairedDevice);
+        this.zone.run(() => {
+            this.bluetoothProvider.connectToDevice(unpairedDevice);
+        });
     }
 
     disconnectFromDevice(pairedDevice: BluetoothDevice) {
-        this.bluetoothProvider.disconnectFromDevice(pairedDevice);
-        if (pairedDevice) {
-            pairedDevice.connected = false;
-        }
+
+        this.zone.run(() => {
+            this.bluetoothProvider.disconnectFromDevice(pairedDevice);
+            if (pairedDevice) {
+                this.currentDevice = new BluetoothDevice();
+                pairedDevice.connected = false;
+            }
+        });
     }
 
 

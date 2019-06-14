@@ -6,122 +6,155 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Play</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Play</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div [hidden]="!showDeviceControl">
-    <ion-list-header>Configuration for:{{connectionProvider.currentDevice.macAddress}}
+    <div>
+        <ion-list-header>Configuration for:{{connectionProvider.currentDevice.macAddress}}
 
-    </ion-list-header>
-    <ion-item>
-      <button ion-button color="success">Procedures
-      </button>
-    </ion-item>
-    <h2>Mode Settings</h2>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-3>
-          <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"
-                    (click)="previousMode()"></ion-icon>
-        </ion-col>
-        <ion-col align-items-center col-6>
-          <ion-select align-items-center class="mode-select" [(ngModel)]="connectionProvider.currentDevice.play.mode"
-                      style="max-width:100%">
-            <ion-option value="1">Mode 1</ion-option>
-            <ion-option value="2">Mode 2</ion-option>
-            <ion-option value="3">Mode 3</ion-option>
-            <ion-option value="4">Mode 4</ion-option>
-            <ion-option value="5">Mode 5</ion-option>
-            <ion-option value="6">Mode 6</ion-option>
-            <ion-option value="7">Mode 7</ion-option>
-            <ion-option value="8">Mode 8</ion-option>
-          </ion-select>
-        </ion-col>
-        <ion-col col-3>
-          <ion-icon (click)="nextMode()" float-right class="playbutton playbutton-next" large
-                    name="arrow-dropright"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <h2>Global Settings</h2>
-    <ion-row>
-      <ion-col col-3></ion-col>
+        </ion-list-header>
 
-      <ion-col col-6>
+        <h2>Mode Settings</h2>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"
+                              (ionChange)="triggerTransfer()" (click)="connectionProvider.currentDevice.playMode.previousMode()"></ion-icon>
+                </ion-col>
+                <ion-col align-items-center col-6>
+                    <ion-select (ionChange)="triggerTransfer()" align-items-center class="mode-select"
+                                [(ngModel)]="connectionProvider.currentDevice.playMode.modeNumber"
+                                style="max-width:100%">
+                        <ion-option value="1">Mode 1</ion-option>
+                        <ion-option value="2">Mode 2</ion-option>
+                        <ion-option value="3">Mode 3</ion-option>
+                        <ion-option value="4">Mode 4</ion-option>
+                        <ion-option value="5">Mode 5</ion-option>
+                        <ion-option value="6">Mode 6</ion-option>
+                        <ion-option value="7">Mode 7</ion-option>
+                        <ion-option value="8">Mode 8</ion-option>
+                        <ion-option value="9">Mode 9</ion-option>
+                        <ion-option value="10">Mode 10</ion-option>
+                        <ion-option value="11">Mode 11</ion-option>
+                        <ion-option value="12">Mode 12</ion-option>
+                        <ion-option value="13">Mode 13</ion-option>
+                        <ion-option value="14">Mode 14</ion-option>
+                        <ion-option value="15">Mode 15</ion-option>
+                        <ion-option value="16">Mode 16</ion-option>
+                        <ion-option value="17">Mode 17</ion-option>
+                        <ion-option value="18">Mode 18</ion-option>
+                        <ion-option value="19">Mode 19</ion-option>
+                        <ion-option value="20">Mode 20</ion-option>
+                        <ion-option value="21">Mode 21</ion-option>
+                        <ion-option value="22">Mode 22</ion-option>
+                        <ion-option value="23">Mode 23</ion-option>
+                        <ion-option value="24">Mode 24</ion-option>
+                        <ion-option value="25">Mode 25</ion-option>
+                    </ion-select>
+                </ion-col>
+                <ion-col col-3>
+                    <ion-icon (click)="connectionProvider.currentDevice.playMode.nextMode()" float-right
+                              class="playbutton playbutton-next" large
+                              (ionChange)="triggerTransfer()" name="arrow-dropright"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Hue</ion-label>
+                        <ion-range [debounce]="500"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.hue"
+                                   min="0" max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+
+                    <ion-item>
+                        <ion-label>Saturation</ion-label>
+                        <ion-range [debounce]="500"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.saturation" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Value</ion-label>
+                        <ion-range [debounce]="500"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.value"
+                                   min="0" max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>Speed</ion-label>
+                        <ion-range [debounce]="500" color="dark"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.speed" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>F1</ion-label>
+                        <ion-range [debounce]="500" color="dark"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature1" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3></ion-col>
+
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label>F2</ion-label>
+                        <ion-range [debounce]="500" color="dark"
+                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature2" min="0"
+                                   max="255"
+                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-3></ion-col>
+            </ion-row>
+        </ion-grid>
+
         <ion-item>
-          <ion-label>Speed</ion-label>
-          <ion-range [debounce]="500" color="dark" [(ngModel)]="connectionProvider.currentDevice.global.speed" min="0"
-                     max="255"
-                     (ionChange)="triggerTransfer()" pin="true"></ion-range>
+            <button ion-button color="success" [disabled]="transfering" (click)="sendPlay()">Transfer
+            </button>
         </ion-item>
-      </ion-col>
-      <ion-col col-3></ion-col>
 
-    </ion-row>
-    <ion-row>
-      <ion-col col-3></ion-col>
-      <ion-col col-6>
-        <ion-item>
-          <ion-label>Hue</ion-label>
-          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.hue" min="0" max="255"
-                     (ionChange)="triggerTransfer()" pin="true"></ion-range>
-        </ion-item>
-      </ion-col>
-      <ion-col col-3></ion-col>
 
-    </ion-row>
-    <ion-row>
-      <ion-col col-3></ion-col>
-      <ion-col col-6>
-
-        <ion-item>
-          <ion-label>Saturation</ion-label>
-          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.saturation" min="0"
-                     max="255"
-                     (ionChange)="triggerTransfer()" pin="true"></ion-range>
-        </ion-item>
-      </ion-col>
-      <ion-col col-3></ion-col>
-
-    </ion-row>
-    <ion-row>
-      <ion-col col-3></ion-col>
-      <ion-col col-6>
-        <ion-item>
-          <ion-label>Value</ion-label>
-          <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.global.color.value" min="0" max="255"
-                     (ionChange)="triggerTransfer()" pin="true"></ion-range>
-        </ion-item>
-      </ion-col>
-      <ion-col col-3></ion-col>
-
-    </ion-row>
-    <ion-item>
-      <button ion-button color="success" (click)="transferConfiguration()">Transfer Changes
-      </button>
-    </ion-item>
-    <ion-item>
-      <button ion-button color="success" (click)="addToProcedure()">Add to Procedure
-      </button>
-      <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.procedureTimeLapse" min="0" max="20"
-                 (ionChange)="triggerTransfer()" pin="true"></ion-range>
-    </ion-item>
-
-    <ion-item>
-      <ion-checkbox [(ngModel)]="triggerAutomatically">Trigger Automatically</ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button color="success" (click)="sendProcedureTest()">Send Procedure Test
-      </button>
-      <button ion-button color="success" (click)="sendPlayTest()">Send play Test
-      </button>
-    </ion-item>
-  </div>
+    </div>
 
 </ion-content>

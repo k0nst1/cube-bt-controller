@@ -27,10 +27,15 @@
             <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"
                         (ionChange)="connectToDevice($event)">
                 <h2>Nearby Devices</h2>
-                <ion-option *ngFor="let device of connectionProvider.bluetoothDevices" value={{device.macAddress}}>{{device.name ?
+                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?
                     device.name : device.macAddress}}
                 </ion-option>
             </ion-select>
+        </ion-item>
+
+        <ion-item *ngIf="this.bluetoothProvider.currentDevice.connected">
+            Connected to {{this.bluetoothProvider.currentDevice.macAddress}}
+            <button ion-button color="success" (click)="disconnectFromDevice(this.bluetoothProvider.currentDevice)">Disconnect</button>
         </ion-item>
 
     </ion-list>

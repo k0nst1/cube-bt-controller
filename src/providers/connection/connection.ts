@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {BluetoothDevice} from "../../models/bluetoothDevice";
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
 import {AppModule} from "../../app/app.module";
@@ -16,10 +16,13 @@ export class ConnectionProvider {
     private bluetooth: BluetoothSerial;
     bluetoothDevices = [];
     currentDevice = new BluetoothDevice();
+    zone: NgZone;
 
     constructor(public bt: BluetoothSerial) {
         console.log('Hello ConnectionProvider Provider');
         this.bluetooth = bt;
+        this.zone = new NgZone({enableLongStackTrace: false});
+
     }
 
     scanForDevices() {
@@ -54,8 +57,10 @@ export class ConnectionProvider {
     }
 
     private onConnected(peripheral, unpairedDevice) {
-        this.currentDevice.connected = true;
-        this.currentDevice.macAddress = unpairedDevice;
+        this.zone.run(() => {
+            this.currentDevice.connected = true;
+            this.currentDevice.macAddress = unpairedDevice;
+        });
     }
 
     private onConnectionFail(unpairedDevice) {
