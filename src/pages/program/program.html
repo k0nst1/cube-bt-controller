@@ -19,9 +19,11 @@
 
         </ion-list-header>
         <ion-list>
-            <ion-item *ngFor="let mode of currentProgram.entry">
-                M:{{mode.modeNumber}}-F1:{{mode.feature1}}-F2:{{mode.feature1}}-F3:{{mode.feature3}}-S:{{mode.speed}}
-                <ion-icon (click)="removeFromProgram(mode)" name="close"></ion-icon>
+            <ion-item *ngFor="let mode of currentProgram?.entry">
+                <ion-label>
+                    M:{{mode.modeNumber}}-F1:{{mode.feature1}}-S:{{mode.speed}}-T:{{mode.timelapse}}
+                    <ion-icon (click)="removeFromProgram(mode)" name="close"></ion-icon>
+                </ion-label>
             </ion-item>
         </ion-list>
         <h2>Mode Settings</h2>
@@ -56,6 +58,9 @@
                         <ion-option value="20">Mode 20</ion-option>
                         <ion-option value="21">Mode 21</ion-option>
                         <ion-option value="22">Mode 22</ion-option>
+                        <ion-option value="23">Mode 23</ion-option>
+                        <ion-option value="24">Mode 24</ion-option>
+                        <ion-option value="25">Mode 25</ion-option>
 
 
                     </ion-select>
@@ -67,91 +72,86 @@
             </ion-row>
 
             <ion-row>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Hue</ion-label>
-                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.hue" min="0" max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Hue
+                        <ion-badge>{{currentMode.color.hue}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="currentMode.color.hue" min="0" max="255"></ion-range>
                 </ion-col>
-                <ion-col col-6></ion-col>
+                <ion-col col-4>
+
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-8>
+
+                    <ion-label>Saturation
+                        <ion-badge>{{currentMode.color.saturation}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="currentMode.color.saturation" min="0"
+                               max="255"></ion-range>
+
+                </ion-col>
+                <ion-col col-4>
+                </ion-col>
 
             </ion-row>
             <ion-row>
-                <ion-col col-6>
-
-                    <ion-item>
-                        <ion-label>Saturation</ion-label>
-                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.saturation" min="0"
-                                   max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Value
+                        <ion-badge> {{currentMode.color.value}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="currentMode.color.value" min="0" max="255"></ion-range>
                 </ion-col>
-                <ion-col col-6></ion-col>
+                <ion-col col-4>
+                </ion-col>
+            </ion-row>
 
+            <ion-row>
+                <ion-col col-8>
+                    <ion-label>Feature1
+                        <ion-badge>{{currentMode.feature1}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="currentMode.feature1" min="0" max="255"></ion-range>
+                </ion-col>
+                <ion-col col-4>
+                </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Value</ion-label>
-                        <ion-range [debounce]="500" [(ngModel)]="currentMode.color.value" min="0" max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
-                </ion-col>
+                <ion-col col-8>
 
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>F1</ion-label>
-                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature1" min="0" max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                    <ion-label>Speed
+                        <ion-badge>{{currentMode.speed}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.speed" min="0"
+                               max="255"></ion-range>
                 </ion-col>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>F2</ion-label>
-                        <ion-range [debounce]="500" [(ngModel)]="currentMode.feature2" min="0" max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-4>
                 </ion-col>
-                <ion-col col-6></ion-col>
-
             </ion-row>
             <ion-row>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Speed</ion-label>
-                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.speed" min="0"
-                                   max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Time
+                        <ion-badge>{{currentMode.timelapse}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.timelapse" min="0"
+                               max="255"
+                               pin="true"></ion-range>
                 </ion-col>
-                <ion-col col-6></ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Time</ion-label>
-                        <ion-range [debounce]="500" color="dark" [(ngModel)]="currentMode.timelapse" min="0"
-                                   max="255"
-                                   pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-4>
                 </ion-col>
-                <ion-col col-6></ion-col>
             </ion-row>
         </ion-grid>
 
         <ion-item>
-            <button ion-button color="success" (click)="addToProgram()">Add to Program
-            </button>
+            <button ion-button color="success" (click)="addToProgram()">Add to Program</button>
+            <button ion-button color="success" [disabled]="transfering" (click)="playProgram()">Play Program</button>
         </ion-item>
         <ion-item>
-            <button ion-button color="success" [disabled]="transfering" (click)="playProgram()">Play Program
-            </button>
+            <button ion-button color="success" [disabled]="transfering" (click)="saveProgram()">Save Program</button>
+            <button ion-button color="success" (click)="addProgramToStorage()">Save to Storage</button>
         </ion-item>
-        <ion-item>
-            <button ion-button color="success" [disabled]="transfering" (click)="saveProgram()">Save Program
-            </button>
-        </ion-item>
+
     </div>
 
 </ion-content>

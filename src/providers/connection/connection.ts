@@ -70,4 +70,8 @@ export class ConnectionProvider {
     public transfer(input){
         return this.bluetooth.write(input);
     }
+
+    public listConnectedDevices(){
+        return this.bluetooth.list();
+    }
 }

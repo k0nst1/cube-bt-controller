@@ -24,7 +24,8 @@
             <ion-row>
                 <ion-col col-3>
                     <ion-icon float-left class="playbutton playbutton-previous" large name="arrow-dropleft"
-                              (ionChange)="triggerTransfer()" (click)="connectionProvider.currentDevice.playMode.previousMode()"></ion-icon>
+                              (ionChange)="triggerTransfer()"
+                              (click)="connectionProvider.currentDevice.playMode.previousMode()"></ion-icon>
                 </ion-col>
                 <ion-col align-items-center col-6>
                     <ion-select (ionChange)="triggerTransfer()" align-items-center class="mode-select"
@@ -64,95 +65,82 @@
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-3></ion-col>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Hue</ion-label>
-                        <ion-range [debounce]="500"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.hue"
-                                   min="0" max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Hue
+                        <ion-badge>{{connectionProvider.currentDevice.playMode.color.hue}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500"
+                               [(ngModel)]="connectionProvider.currentDevice.playMode.color.hue"
+                               min="0" max="255"
+                               (ionChange)="triggerTransfer()"></ion-range>
                 </ion-col>
-                <ion-col col-3></ion-col>
+                <ion-col col-4>
+                </ion-col>
 
             </ion-row>
             <ion-row>
-                <ion-col col-3></ion-col>
-                <ion-col col-6>
-
-                    <ion-item>
-                        <ion-label>Saturation</ion-label>
-                        <ion-range [debounce]="500"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.saturation" min="0"
-                                   max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Saturation
+                        <ion-badge> {{connectionProvider.currentDevice.playMode.color.saturation}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500"
+                               [(ngModel)]="connectionProvider.currentDevice.playMode.color.saturation" min="0"
+                               max="255"
+                               (ionChange)="triggerTransfer()"></ion-range>
                 </ion-col>
-                <ion-col col-3></ion-col>
+                <ion-col col-4>
+                </ion-col>
 
             </ion-row>
             <ion-row>
-                <ion-col col-3></ion-col>
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Value</ion-label>
-                        <ion-range [debounce]="500"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.color.value"
-                                   min="0" max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Value
+                        <ion-badge> {{connectionProvider.currentDevice.playMode.color.value}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500"
+                               [(ngModel)]="connectionProvider.currentDevice.playMode.color.value"
+                               min="0" max="255"
+                               (ionChange)="triggerTransfer()"></ion-range>
                 </ion-col>
-                <ion-col col-3></ion-col>
+                <ion-col col-4>
+                </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-3></ion-col>
-
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>Speed</ion-label>
-                        <ion-range [debounce]="500" color="dark"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.speed" min="0"
-                                   max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Speed
+                        <ion-badge> {{connectionProvider.currentDevice.playMode.speed}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" color="dark"
+                               [(ngModel)]="connectionProvider.currentDevice.playMode.speed" min="0"
+                               max="255"
+                               (ionChange)="triggerTransfer()"></ion-range>
                 </ion-col>
-                <ion-col col-3></ion-col>
+                <ion-col col-4>
+                </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-3></ion-col>
 
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>F1</ion-label>
-                        <ion-range [debounce]="500" color="dark"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature1" min="0"
-                                   max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-8>
+                    <ion-label>Feature 1
+                        <ion-badge> {{connectionProvider.currentDevice.playMode.feature1}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" color="dark"
+                               [(ngModel)]="connectionProvider.currentDevice.playMode.feature1" min="0"
+                               max="255"
+                               (ionChange)="triggerTransfer()"></ion-range>
                 </ion-col>
-                <ion-col col-3></ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-3></ion-col>
-
-                <ion-col col-6>
-                    <ion-item>
-                        <ion-label>F2</ion-label>
-                        <ion-range [debounce]="500" color="dark"
-                                   [(ngModel)]="connectionProvider.currentDevice.playMode.feature2" min="0"
-                                   max="255"
-                                   (ionChange)="triggerTransfer()" pin="true"></ion-range>
-                    </ion-item>
+                <ion-col col-4>
                 </ion-col>
-                <ion-col col-3></ion-col>
             </ion-row>
         </ion-grid>
 
         <ion-item>
             <button ion-button color="success" [disabled]="transfering" (click)="sendPlay()">Transfer
             </button>
+            <button ion-button color="success" [disabled]="transfering" (click)="addPlayToProgram()">Add to Program
+            </button>
         </ion-item>
+
 
 
     </div>

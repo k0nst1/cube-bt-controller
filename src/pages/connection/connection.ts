@@ -27,7 +27,6 @@ export class ConnectionPage {
     transferSucceeded: boolean = false;
     triggerAutomatically: boolean = false;
 
-
     constructor(public navCtrl: NavController, public navParams: NavParams, public connectionProvider: ConnectionProvider) {
         this.bluetoothProvider = connectionProvider;
         this.bluetoothDevices = [];
@@ -35,6 +34,7 @@ export class ConnectionPage {
         this.zone = new NgZone({enableLongStackTrace: false});
         //this.currentDevice.connected = true;
         //this.showDeviceControl = true;
+
     }
 
     ionViewDidLoad() {

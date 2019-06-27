@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ConnectionProvider} from "../../providers/connection/connection";
 import {Procedure} from "../../models/procedure";
 import {Mode} from "../../models/mode";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the ProgramPage page.
@@ -19,41 +20,53 @@ export class ProgramPage {
     public connectionProvider: ConnectionProvider;
     public currentProgram: Procedure;
     public currentMode: Mode;
-    public zone: NgZone
+    public zone: NgZone;
     public transfering = false;
+    public localStorage;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public provider: ConnectionProvider) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public provider: ConnectionProvider, public storage: Storage) {
         this.connectionProvider = provider;
-        this.currentProgram = new Procedure();
         this.currentMode = new Mode("test", 100, 100, 100, 100, {hue: 255, saturation: 255, value: 255}, 10, 1);
-        console.log(this.currentMode);
-        console.log("asdasd");
         this.zone = new NgZone({enableLongStackTrace: false});
-
+        this.storage.get("program").then(
+            program => {
+                console.log("Program found in storage!");
+                console.log(program);
+                if(program == null){
+                    this.connectionProvider.currentDevice.program = this.currentProgram = new Procedure();
+                }else{
+                    this.connectionProvider.currentDevice.program = this.currentProgram = program;
+                }
+            },
+            error => {
+                console.log("no program found using default program!");
+                this.connectionProvider.currentDevice.program = this.currentProgram = new Procedure();
+            });
     }
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ProgramPage');
     }
 
     public addToProgram() {
-        console.log(this.currentMode);
         this.zone.run(() => {
             this.currentProgram.entry.push(this.currentMode);
             this.currentMode = new Mode("test", 100, 100, 100, 100, {hue: 255, saturation: 255, value: 255}, 10, 1);
         });
+        console.log("added currentMode:");
+        console.log(this.currentMode);
+        console.log("to current program:");
         console.log(this.currentProgram);
     };
 
     public playProgram() {
-        let device = this.connectionProvider.currentDevice;
-        let input = {};
-        input = this.currentProgram.programTo8Bit();
+        let input = this.currentProgram.programTo8Bit();
         this.transfering = true;
         let component = this;
         this.connectionProvider.transfer(input).then(function success(response) {
             console.log("Succesfully sent settings object");
-            setTimeout(function(){
+            setTimeout(function () {
                 component.transfering = false;
             }, 1000);
         });
@@ -66,12 +79,14 @@ export class ProgramPage {
         let component = this;
         this.connectionProvider.transfer(input).then(function success(response) {
             console.log("Succesfully sent settings object");
-            setTimeout(function(){
+            setTimeout(function () {
                 component.transfering = false;
             }, 1000);
         });
     }
-
+    addProgramToStorage(){
+        this.storage.set("program", this.currentProgram);
+    }
     public removeFromProgram(mode) {
         this.zone.run(() => {
             let index = this.currentProgram.entry.indexOf(mode)

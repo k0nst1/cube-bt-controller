@@ -6,11 +6,11 @@ export class Mode {
     public feature2: 100;
     public feature3: 100;
     public color: { hue: 255, saturation: 255, value: 255 };
-    public timelapse: 10;
+    public timelapse: 30;
     public modeNumber: number = 1;
 
 
-    constructor(modeName: string, speed: 100, feature1: 100, feature2: 100, feature3: 100, color: { hue: 255; saturation: 255; value: 255 }, timelapse: 10, modeNumber: number) {
+    constructor(modeName: string, speed, feature1, feature2, feature3, color: { hue; saturation; value }, timelapse, modeNumber: number) {
         this.modeName = modeName;
         this.speed = speed;
         this.feature1 = feature1;
@@ -42,7 +42,7 @@ export class Mode {
     }
 
     public nextMode = function () {
-        if (this.modeNumber == 22) {
+        if (this.modeNumber == 25) {
             this.modeNumber = 1;
         } else {
             this.modeNumber++;
@@ -51,7 +51,7 @@ export class Mode {
 
     public previousMode = function () {
         if (this.modeNumber == 1) {
-            this.modeNumber = 22;
+            this.modeNumber = 25;
         } else {
             this.modeNumber--;
         }

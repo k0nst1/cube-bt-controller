@@ -51,6 +51,10 @@ export class PlayPage {
         }
     }
 
+    public addPlayToProgram(){
+        this.connectionProvider.currentDevice.program.entry.push(this.connectionProvider.currentDevice.playMode);
+    }
+
 
 
 }

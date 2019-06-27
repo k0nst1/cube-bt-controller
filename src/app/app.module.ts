@@ -12,7 +12,7 @@ import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
 import {TabsPage} from "../pages/tabs/tabs";
 import {PlayPage} from "../pages/play/play";
 import { ConnectionProvider } from '../providers/connection/connection';
-
+import {IonicStorageModule} from "@ionic/storage";
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { ConnectionProvider } from '../providers/connection/connection';
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
 
     ],
     bootstrap: [IonicApp],
