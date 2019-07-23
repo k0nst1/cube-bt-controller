@@ -5,25 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/.sourcemaps/main.js.map" afterPath="$PROJECT_DIR$/.sourcemaps/main.js.map" />
       <change beforePath="$PROJECT_DIR$/config.xml" afterPath="$PROJECT_DIR$/config.xml" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change beforePath="$PROJECT_DIR$/plugins/android.json" afterPath="$PROJECT_DIR$/plugins/android.json" />
-      <change beforePath="$PROJECT_DIR$/plugins/fetch.json" afterPath="$PROJECT_DIR$/plugins/fetch.json" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" afterPath="$PROJECT_DIR$/src/app/app.module.ts" />
-      <change beforePath="$PROJECT_DIR$/src/models/bluetoothDevice.ts" afterPath="$PROJECT_DIR$/src/models/bluetoothDevice.ts" />
-      <change beforePath="$PROJECT_DIR$/src/models/mode.ts" afterPath="$PROJECT_DIR$/src/models/mode.ts" />
       <change beforePath="$PROJECT_DIR$/src/models/procedure.ts" afterPath="$PROJECT_DIR$/src/models/procedure.ts" />
-      <change beforePath="$PROJECT_DIR$/src/pages/connection/connection.ts" afterPath="$PROJECT_DIR$/src/pages/connection/connection.ts" />
       <change beforePath="$PROJECT_DIR$/src/pages/play/play.html" afterPath="$PROJECT_DIR$/src/pages/play/play.html" />
-      <change beforePath="$PROJECT_DIR$/src/pages/play/play.ts" afterPath="$PROJECT_DIR$/src/pages/play/play.ts" />
       <change beforePath="$PROJECT_DIR$/src/pages/program/program.html" afterPath="$PROJECT_DIR$/src/pages/program/program.html" />
-      <change beforePath="$PROJECT_DIR$/src/pages/program/program.ts" afterPath="$PROJECT_DIR$/src/pages/program/program.ts" />
-      <change beforePath="$PROJECT_DIR$/src/providers/connection/connection.ts" afterPath="$PROJECT_DIR$/src/providers/connection/connection.ts" />
-      <change beforePath="$PROJECT_DIR$/www/build/0.js" afterPath="$PROJECT_DIR$/www/build/0.js" />
-      <change beforePath="$PROJECT_DIR$/www/build/main.css" afterPath="$PROJECT_DIR$/www/build/main.css" />
       <change beforePath="$PROJECT_DIR$/www/build/main.js" afterPath="$PROJECT_DIR$/www/build/main.js" />
       <change beforePath="$PROJECT_DIR$/www/build/main.js.map" afterPath="$PROJECT_DIR$/www/build/main.js.map" />
-      <change beforePath="$PROJECT_DIR$/www/build/vendor.js" afterPath="$PROJECT_DIR$/www/build/vendor.js" />
       <change beforePath="$PROJECT_DIR$/www/build/vendor.js.map" afterPath="$PROJECT_DIR$/www/build/vendor.js.map" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +24,8 @@
       <file leaf-file-name="program.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/program/program.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-315">
-              <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+            <state relative-caret-position="590">
+              <caret line="63" column="39" lean-forward="false" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="39" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -50,8 +36,8 @@
       <file leaf-file-name="procedure.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/procedure.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+            <state relative-caret-position="176">
+              <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -60,8 +46,28 @@
       <file leaf-file-name="mode.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/mode.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state relative-caret-position="170">
+              <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="connection.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/providers/connection/connection.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.d.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@ionic-native/bluetooth-serial/index.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="780">
+              <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -70,8 +76,8 @@
       <file leaf-file-name="connection.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/connection/connection.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="172">
+              <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -79,31 +85,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="play.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/play/play.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="54" column="8" lean-forward="false" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+            <state relative-caret-position="230">
+              <caret line="37" column="36" lean-forward="true" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="program.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="program.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/program/program.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="24" column="88" lean-forward="false" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
+            <state relative-caret-position="185">
+              <caret line="160" column="87" lean-forward="false" selection-start-line="160" selection-start-column="87" selection-end-line="160" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -112,8 +108,8 @@
       <file leaf-file-name="play.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/play/play.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="70" column="20" lean-forward="false" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+            <state relative-caret-position="155">
+              <caret line="83" column="85" lean-forward="false" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -131,16 +127,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connection.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/connection/connection.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -152,7 +138,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ngif</find>
       <find>alert</find>
       <find>app-debug</find>
       <find>currentDe</find>
@@ -180,8 +165,9 @@
       <find>set</find>
       <find>localStorage</find>
       <find>ionic/pro</find>
-      <find>play</find>
       <find>pin</find>
+      <find>play</find>
+      <find>playProgram</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,16 +196,16 @@
         <option value="$PROJECT_DIR$/src/pages/tabs/tabs.html" />
         <option value="$PROJECT_DIR$/src/pages/connection/connection.html" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/models/procedure.ts" />
         <option value="$PROJECT_DIR$/src/providers/connection/connection.ts" />
         <option value="$PROJECT_DIR$/src/models/mode.ts" />
         <option value="$PROJECT_DIR$/src/pages/connection/connection.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/models/bluetoothDevice.ts" />
         <option value="$PROJECT_DIR$/src/pages/play/play.ts" />
-        <option value="$PROJECT_DIR$/src/pages/play/play.html" />
         <option value="$PROJECT_DIR$/src/pages/program/program.ts" />
+        <option value="$PROJECT_DIR$/src/pages/play/play.html" />
         <option value="$PROJECT_DIR$/src/pages/program/program.html" />
+        <option value="$PROJECT_DIR$/src/models/procedure.ts" />
       </list>
     </option>
   </component>
@@ -534,7 +520,7 @@
       <workItem from="1560522624574" duration="4237000" />
       <workItem from="1560808982710" duration="21000" />
       <workItem from="1560884839567" duration="2494000" />
-      <workItem from="1561488326044" duration="3055000" />
+      <workItem from="1561488326044" duration="5488000" />
     </task>
     <task id="LOCAL-00001" summary="New changes, slightly new layout, basically first working prototype">
       <created>1555270350324</created>
@@ -585,11 +571,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560499067218</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="improving usability">
+      <created>1561663846341</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1561663846341</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86790000" />
+    <option name="totallyTimeSpent" value="89223000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -610,10 +603,10 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32690883" sideWeight="0.42094016" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32690883" sideWeight="0.41452992" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32260373" sideWeight="0.57905984" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32690883" sideWeight="0.5854701" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -664,7 +657,8 @@
     <MESSAGE value="Some new things added.. still WIP" />
     <MESSAGE value="Switching to tab menu" />
     <MESSAGE value="Splitting old content in play and connection page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Splitting old content in play and connection page" />
+    <MESSAGE value="improving usability" />
+    <option name="LAST_COMMIT_MESSAGE" value="improving usability" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -843,13 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@ionic-native/bluetooth-serial/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="120" column="4" lean-forward="false" selection-start-line="120" selection-start-column="4" selection-end-line="120" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/connection/connection.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -896,16 +883,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@ionic/storage/dist/storage.d.ts" />
-    <entry file="file://$PROJECT_DIR$/src/providers/connection/connection.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/connection/connection.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -932,62 +909,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/play/play.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="54" column="8" lean-forward="false" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/connection/connection.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state relative-caret-position="172">
+          <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/procedure.ts">
+    <entry file="file://$PROJECT_DIR$/src/models/mode.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+        <state relative-caret-position="170">
+          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/play/play.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="70" column="20" lean-forward="false" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+        <state relative-caret-position="155">
+          <caret line="83" column="85" lean-forward="false" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="85" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/mode.ts">
+    <entry file="file://$PROJECT_DIR$/src/pages/program/program.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="185">
+          <caret line="160" column="87" lean-forward="false" selection-start-line="160" selection-start-column="87" selection-end-line="160" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/play/play.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="37" column="36" lean-forward="true" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@ionic-native/bluetooth-serial/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/procedure.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/program/program.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+        <state relative-caret-position="590">
+          <caret line="63" column="39" lean-forward="false" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="39" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/program/program.html">
+    <entry file="file://$PROJECT_DIR$/src/providers/connection/connection.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="24" column="88" lean-forward="false" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
+        <state relative-caret-position="165">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding />
         </state>
       </provider>

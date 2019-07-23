@@ -132,12 +132,20 @@
                 <ion-col col-4>
                 </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col col-8>
+                    <ion-label>Feature2
+                        <ion-badge>{{connectionProvider.currentDevice.playMode.feature2}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="connectionProvider.currentDevice.playMode.feature2" min="0" max="255"></ion-range>
+                </ion-col>
+                <ion-col col-4>
+                </ion-col>
+            </ion-row>
         </ion-grid>
 
         <ion-item>
             <button ion-button color="success" [disabled]="transfering" (click)="sendPlay()">Transfer
-            </button>
-            <button ion-button color="success" [disabled]="transfering" (click)="addPlayToProgram()">Add to Program
             </button>
         </ion-item>
 

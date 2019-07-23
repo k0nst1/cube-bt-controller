@@ -119,6 +119,16 @@
             </ion-row>
             <ion-row>
                 <ion-col col-8>
+                    <ion-label>Feature2
+                        <ion-badge>{{currentMode.feature2}}</ion-badge>
+                    </ion-label>
+                    <ion-range [debounce]="500" [(ngModel)]="currentMode.feature2" min="0" max="255"></ion-range>
+                </ion-col>
+                <ion-col col-4>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-8>
 
                     <ion-label>Speed
                         <ion-badge>{{currentMode.speed}}</ion-badge>
@@ -149,7 +159,9 @@
         </ion-item>
         <ion-item>
             <button ion-button color="success" [disabled]="transfering" (click)="saveProgram()">Save Program</button>
+<!--
             <button ion-button color="success" (click)="addProgramToStorage()">Save to Storage</button>
+-->
         </ion-item>
 
     </div>
