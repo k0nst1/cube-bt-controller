@@ -80,5 +80,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-bluetoothle": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-bluetoothle@4.5.5"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

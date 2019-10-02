@@ -92,7 +92,7 @@ webpackEmptyAsyncContext.id = 111;
 
 var map = {
 	"../pages/tabs/tabs.module": [
-		280,
+		281,
 		0
 	]
 };
@@ -120,9 +120,9 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__program_program__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__play_play__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__connection_connection__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_connection_connection__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__play_play__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__connection_connection__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_connection_connection__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -177,10 +177,10 @@ var TabsPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_procedure__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_mode__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(201);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -246,23 +246,13 @@ var ProgramPage = /** @class */ (function () {
         var input = this.currentProgram.programTo8Bit();
         this.transfering = true;
         var component = this;
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            setTimeout(function () {
-                component.transfering = false;
-            }, 1000);
-        });
+        this.connectionProvider.transfer(input);
     };
     ProgramPage.prototype.saveProgram = function () {
         var input = this.currentProgram.saveProgram();
         this.transfering = true;
         var component = this;
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            setTimeout(function () {
-                component.transfering = false;
-            }, 1000);
-        });
+        this.connectionProvider.transfer(input);
     };
     ProgramPage.prototype.addProgramToStorage = function () {
         this.storage.set("program", this.currentProgram);
@@ -383,14 +373,14 @@ var Procedure = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 202:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connection_connection__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -427,9 +417,7 @@ var PlayPage = /** @class */ (function () {
         var component = this;
         this.transfering = true;
         var input = this.connectionProvider.currentDevice.playMode.playTo8Bit();
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-        });
+        this.connectionProvider.transfer(input);
         setTimeout(function () {
             component.transfering = false;
         }, 1000);
@@ -456,7 +444,7 @@ var PlayPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -464,7 +452,7 @@ var PlayPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connection_connection__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connection_connection__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -511,26 +499,27 @@ var ConnectionPage = /** @class */ (function () {
     ConnectionPage.prototype.discoverUnpaired = function () {
         this.isScanning = true;
         var component = this;
-        console.log("currently scanning...");
-        this.bluetoothProvider.scanForDevices().then(function success(data) {
-            if (data) {
-                component.bluetoothDevices = [];
-                data.forEach(function (device) {
-                    var newDevice = new __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__["a" /* BluetoothDevice */]();
-                    newDevice.name = device.name ? device.name : null;
-                    newDevice.uuid = device.id;
-                    newDevice.macAddress = device.address;
-                    newDevice.connected = false;
-                    component.bluetoothDevices.push(newDevice);
-                    component.bluetoothProvider.bluetoothDevices.push(newDevice);
-                });
-            }
+        setTimeout(function () {
+            component.bluetoothProvider.stopScan();
             console.log("finished scanning...");
-            component.isScanning = false;
-            console.log(data);
-        }, function error(error) {
+        }, 8000);
+        console.log("currently scanning for 10 seconds...");
+        this.bluetoothProvider.scanForDevices().subscribe(function (device) {
+            var parsedDevice = JSON.parse(JSON.stringify(device));
+            var isUnknown = component.isUnknown(parsedDevice);
+            if (device && isUnknown == true) {
+                var newDevice = new __WEBPACK_IMPORTED_MODULE_2__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+                newDevice.name = parsedDevice.name ? parsedDevice.name : null;
+                newDevice.uuid = null;
+                newDevice.macAddress = parsedDevice.address;
+                newDevice.connected = false;
+                console.log("adding new device to collection");
+                component.bluetoothProvider.bluetoothDevices.push(newDevice);
+            }
+        }, function (error) {
             console.log(error);
         });
+        component.isScanning = false;
     };
     ConnectionPage.prototype.checkBluetooth = function () {
         var component = this;
@@ -540,6 +529,8 @@ var ConnectionPage = /** @class */ (function () {
         }, function error() {
             component.connectionProvider.bt.enable();
         });
+    };
+    ConnectionPage.prototype.stopScan = function () {
     };
     ConnectionPage.prototype.connectToDevice = function (unpairedDevice) {
         var _this = this;
@@ -557,9 +548,18 @@ var ConnectionPage = /** @class */ (function () {
             }
         });
     };
+    ConnectionPage.prototype.isUnknown = function (device) {
+        var unknown = true;
+        this.bluetoothProvider.bluetoothDevices.forEach(function (currentDevice) {
+            if (unknown)
+                unknown = !(currentDevice.macAddress === device.address);
+        });
+        console.log(unknown);
+        return unknown;
+    };
     ConnectionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Connection</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <ion-list>\n        <ion-list-header>\n            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>\n                <ion-icon name="sync"></ion-icon>\n            </button>\n        </ion-list-header>\n        <ion-item *ngIf="isScanning" text-center>\n            <ion-spinner name="dots"></ion-spinner>\n        </ion-item>\n        <ion-item>\n            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"\n                        (ionChange)="connectToDevice($event)">\n                <h2>Nearby Devices</h2>\n                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?\n                    device.name : device.macAddress}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n\n        <ion-item *ngIf="this.bluetoothProvider.currentDevice.connected">\n            Connected to {{this.bluetoothProvider.currentDevice.macAddress}}\n            <button ion-button color="success" (click)="disconnectFromDevice(this.bluetoothProvider.currentDevice)">Disconnect</button>\n        </ion-item>\n\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
+            selector: 'page-connection',template:/*ion-inline-start:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/'<!--\n  Generated template for the ConnectionPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Connection</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <ion-list>\n        <ion-list-header>\n            <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>\n                <ion-icon name="sync"></ion-icon>\n            </button>\n            <button *ngIf="isScanning" (click)="stopScan()" item-end ion-button clear large>\n                <ion-icon name="remove-circle-outline"></ion-icon>\n            </button>\n        </ion-list-header>\n        <ion-item *ngIf="isScanning" text-center>\n            <ion-spinner name="dots"></ion-spinner>\n        </ion-item>\n        <ion-item>\n            <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"\n                        (ionChange)="connectToDevice($event)">\n                <h2>Nearby Devices</h2>\n                <ion-option *ngFor="let device of bluetoothProvider.bluetoothDevices" value={{device.macAddress}}>{{device.name ?\n                    device.name : device.macAddress}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n\n        <ion-item *ngFor="let device of bluetoothProvider.bluetoothDevices">\n            {{device.macAddress}}\n            <button ion-button color="success" (click)="connectToDevice(device)">Connect</button>\n\n            <button ion-button color="success" (click)="disconnectFromDevice(device)">Disconnect</button>\n        </ion-item>\n\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/konstantinvogel/prototyping/ionic-stuff/cube-bt-controller/src/pages/connection/connection.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_connection_connection__["a" /* ConnectionProvider */]])
     ], ConnectionPage);
@@ -570,13 +570,13 @@ var ConnectionPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 204:
+/***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(228);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -584,7 +584,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 227:
+/***/ 228:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -592,23 +592,25 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(279);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_connection_connection__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_program_program__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_bluetooth_serial__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_tabs_tabs__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_play_play__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_connection_connection__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_play_play__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_connection_connection__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_bluetooth_le__ = __webpack_require__(200);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -658,6 +660,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_bluetooth_le__["a" /* BluetoothLE */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_12__providers_connection_connection__["a" /* ConnectionProvider */],
             ],
@@ -671,7 +674,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 278:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -728,7 +731,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 40:
+/***/ 41:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -736,6 +739,7 @@ var MyApp = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_bluetoothDevice__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_bluetooth_le__ = __webpack_require__(200);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -748,6 +752,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /*
   Generated class for the ConnectionProvider provider.
 
@@ -755,17 +760,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
   and Angular DI.
 */
 var ConnectionProvider = /** @class */ (function () {
-    function ConnectionProvider(bt) {
+    function ConnectionProvider(bt, ble) {
         this.bt = bt;
+        this.ble = ble;
         this.bluetoothDevices = [];
         this.currentDevice = new __WEBPACK_IMPORTED_MODULE_1__models_bluetoothDevice__["a" /* BluetoothDevice */]();
+        this.connectedDevices = [];
         console.log('Hello ConnectionProvider Provider');
         this.bluetooth = bt;
         this.zone = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]({ enableLongStackTrace: false });
+        this.ble.initialize();
     }
     ConnectionProvider.prototype.scanForDevices = function () {
         console.log("currently scanning...");
-        return this.bluetooth.discoverUnpaired();
+        //return this.bluetooth.discoverUnpaired();
+        return this.ble.startScan(null);
+    };
+    ConnectionProvider.prototype.stopScan = function () {
+        console.log("currently scanning...");
+        //return this.bluetooth.discoverUnpaired();
+        return this.ble.stopScan();
     };
     ConnectionProvider.prototype.checkBluetooth = function () {
         var provider = this;
@@ -778,11 +792,13 @@ var ConnectionProvider = /** @class */ (function () {
     };
     ConnectionProvider.prototype.connectToDevice = function (unpairedDevice) {
         var _this = this;
-        this.bluetooth.connect(unpairedDevice);
-        this.bluetooth.connect(unpairedDevice).subscribe(function (peripheral) { return _this.onConnected(peripheral, unpairedDevice); }, function (peripheral) { return _this.onConnectionFail(unpairedDevice); });
+        this.ble.connect({ address: unpairedDevice, autoConnect: true }).subscribe(function (peripheral) { return _this.onConnected(peripheral, unpairedDevice); }, function (peripheral) { return _this.onConnectionFail(unpairedDevice); });
     };
     ConnectionProvider.prototype.disconnectFromDevice = function (pairedDevice) {
-        this.bluetooth.disconnect();
+        if (pairedDevice === null) {
+            return;
+        }
+        this.ble.disconnect({ address: pairedDevice.macAddress });
         if (pairedDevice) {
             pairedDevice.connected = false;
         }
@@ -792,20 +808,23 @@ var ConnectionProvider = /** @class */ (function () {
         this.zone.run(function () {
             _this.currentDevice.connected = true;
             _this.currentDevice.macAddress = unpairedDevice;
+            _this.connectedDevices.push(unpairedDevice);
         });
     };
     ConnectionProvider.prototype.onConnectionFail = function (unpairedDevice) {
         unpairedDevice.connected = false;
     };
     ConnectionProvider.prototype.transfer = function (input) {
-        return this.bluetooth.write(input);
+        this.connectedDevices.forEach(function (device) {
+            this.ble.write({ address: device.macAddress, value: input });
+        });
     };
     ConnectionProvider.prototype.listConnectedDevices = function () {
-        return this.bluetooth.list();
+        return true;
     };
     ConnectionProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_bluetooth_le__["a" /* BluetoothLE */]])
     ], ConnectionProvider);
     return ConnectionProvider;
 }());
@@ -814,5 +833,5 @@ var ConnectionProvider = /** @class */ (function () {
 
 /***/ })
 
-},[204]);
+},[205]);
 //# sourceMappingURL=main.js.map

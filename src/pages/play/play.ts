@@ -35,10 +35,7 @@ export class PlayPage {
         let component = this;
         this.transfering = true;
         let input = this.connectionProvider.currentDevice.playMode.playTo8Bit();
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-
-        });
+        this.connectionProvider.transfer(input);
         setTimeout(function(){
             component.transfering = false;
         }, 1000);

@@ -19,6 +19,9 @@
             <button *ngIf="!isScanning" (click)="checkBluetooth()" item-end ion-button clear large>
                 <ion-icon name="sync"></ion-icon>
             </button>
+            <button *ngIf="isScanning" (click)="stopScan()" item-end ion-button clear large>
+                <ion-icon name="remove-circle-outline"></ion-icon>
+            </button>
         </ion-list-header>
         <ion-item *ngIf="isScanning" text-center>
             <ion-spinner name="dots"></ion-spinner>
@@ -27,15 +30,17 @@
             <ion-select *ngIf="!isScanning" style="max-width:100%" placeholder="Select a device to connect to"
                         (ionChange)="connectToDevice($event)">
                 <h2>Nearby Devices</h2>
-                <ion-option *ngFor="let device of bluetoothDevices" value={{device.macAddress}}>{{device.name ?
+                <ion-option *ngFor="let device of bluetoothProvider.bluetoothDevices" value={{device.macAddress}}>{{device.name ?
                     device.name : device.macAddress}}
                 </ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="this.bluetoothProvider.currentDevice.connected">
-            Connected to {{this.bluetoothProvider.currentDevice.macAddress}}
-            <button ion-button color="success" (click)="disconnectFromDevice(this.bluetoothProvider.currentDevice)">Disconnect</button>
+        <ion-item *ngFor="let device of bluetoothProvider.bluetoothDevices">
+            {{device.macAddress}}
+            <button ion-button color="success" (click)="connectToDevice(device)">Connect</button>
+
+            <button ion-button color="success" (click)="disconnectFromDevice(device)">Disconnect</button>
         </ion-item>
 
     </ion-list>

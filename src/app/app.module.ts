@@ -13,6 +13,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {PlayPage} from "../pages/play/play";
 import { ConnectionProvider } from '../providers/connection/connection';
 import {IonicStorageModule} from "@ionic/storage";
+import {BluetoothLE} from "@ionic-native/bluetooth-le";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {IonicStorageModule} from "@ionic/storage";
         SplashScreen,
         Geolocation,
         BluetoothSerial,
+        BluetoothLE,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConnectionProvider,
 

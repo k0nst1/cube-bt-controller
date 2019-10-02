@@ -86,7 +86,8 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^3.2.0" />
+    <plugin name="cordova-plugin-ble-central" spec="^1.2.2" />
+    <plugin name="cordova-plugin-bluetoothle" spec="^4.5.5" />
     <engine name="android" spec="^7.0.0" />
     <engine name="ios" spec="^4.5.5" />
-    <plugin name="cordova-plugin-ble-central" spec="^1.2.2" />
 </widget>

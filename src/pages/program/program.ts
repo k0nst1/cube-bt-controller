@@ -32,9 +32,9 @@ export class ProgramPage {
             program => {
                 console.log("Program found in storage!");
                 console.log(program);
-                if(program == null){
+                if (program == null) {
                     this.connectionProvider.currentDevice.program = this.currentProgram = new Procedure();
-                }else{
+                } else {
                     this.connectionProvider.currentDevice.program = this.currentProgram = program;
                 }
             },
@@ -64,12 +64,7 @@ export class ProgramPage {
         let input = this.currentProgram.programTo8Bit();
         this.transfering = true;
         let component = this;
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            setTimeout(function () {
-                component.transfering = false;
-            }, 1000);
-        });
+        this.connectionProvider.transfer(input);
     }
 
 
@@ -77,16 +72,13 @@ export class ProgramPage {
         let input = this.currentProgram.saveProgram();
         this.transfering = true;
         let component = this;
-        this.connectionProvider.transfer(input).then(function success(response) {
-            console.log("Succesfully sent settings object");
-            setTimeout(function () {
-                component.transfering = false;
-            }, 1000);
-        });
+        this.connectionProvider.transfer(input);
     }
-    addProgramToStorage(){
+
+    addProgramToStorage() {
         this.storage.set("program", this.currentProgram);
     }
+
     public removeFromProgram(mode) {
         this.zone.run(() => {
             let index = this.currentProgram.entry.indexOf(mode)
